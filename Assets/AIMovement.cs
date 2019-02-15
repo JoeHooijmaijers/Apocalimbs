@@ -26,7 +26,8 @@ public class AIMovement : MonoBehaviour
     {
         if (other.transform == player)
         {
-            nav.SetDestination(player.position);
+            Vector3 LastSeen = new Vector3(player.position.x, player.position.y, player.position.z);
+            nav.SetDestination(LastSeen);
         }
     }
 }
