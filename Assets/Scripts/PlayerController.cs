@@ -4,110 +4,73 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Rigidbody rb;
+
     public float movementSpeed;
+    public float jumpHeight;
     public float rotationSpeed;
-    private CharacterController cc;
 
+    float distanceToGround;
 
-    // Start is called before the first frame update
+    // Use this for initialization
     void Start()
     {
-        cc = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetAxisRaw("Vertical") == 1)
+        distanceToGround = GetComponent<Collider>().bounds.extents.y;
+
+        Movement();
+    }
+
+    void Movement()
+    {
+        Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime);
+        targetDirection = Camera.main.transform.TransformDirection(targetDirection);
+        targetDirection.y = 0.0f;
+        transform.Translate(targetDirection, Space.World);
+        transform.rotation = Quaternion.LookRotation(targetDirection);
+
+        if (Input.GetKey("space"))
         {
-            MoveForward();
+            Jump();
         }
-        
-        if(Input.GetAxisRaw("Horizontal") == 1)
+    }
+
+    void Jump()
+    {
+        bool IsGrounded = Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.0f);
+
+        if (IsGrounded)
         {
-            TurnRight();
-        }else if(Input.GetAxisRaw("Horizontal") == -1)
-        {
-            TurnLeft();
-        }       
+            rb.velocity += jumpHeight * Vector3.up;
+        }
     }
 
-    private void MoveForward()
-    {
-        transform.position += transform.forward * movementSpeed * Time.deltaTime;
-    }
-
-    private void MoveBackward()
+    void DodgeRoll()
     {
 
     }
 
-    private void TurnLeft()
-    {
-        transform.Rotate(Vector3.up, 0 - rotationSpeed);
-    }
-
-    private void TurnRight()
-    {
-        transform.Rotate(Vector3.up, rotationSpeed);
-    }
-
-    private void MoveLeft()
+    void RightArmAttack()
     {
 
     }
 
-    private void MoveRight()
+    void LeftArmAttack()
     {
 
     }
 
-    private void Jump()
+    void RightLegAttack()
     {
 
     }
 
-    private void DodgeRoll()
-    {
-
-    }
-
-    private void AttackLeftArm()
-    {
-
-    }
-
-    private void AttackRightArm()
-    {
-
-    }
-
-    private void AttackLeftLeg()
-    {
-
-    }
-
-    private void AttackRightLeg()
-    {
-
-    }
-
-    private void LIMBHighJump()
-    {
-
-    }
-
-    private void LIMBGroundPound()
-    {
-
-    }
-
-    private void LIMBShoulderTackle()
-    {
-
-    }
-
-    private void Interact()
+    void LeftLegAttack()
     {
 
     }

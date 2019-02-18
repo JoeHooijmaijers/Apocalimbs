@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public Transform target;
 
-    public GameObject player;
+    public float smoothSpeed;
+    public Vector3 offset;
+    public bool lockedOn = false;
+    public float rotationSpeed = 10.0f;
 
-    private Vector3 offset;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        offset = transform.position - player.transform.position;
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
+        Vector3 desiredPosition = target.position + offset;
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPosition;
+
+        if (!lockedOn)
+        {
+            Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotationSpeed, Vector3.up);
+            offset = camTurnAngle * offset;
+            transform.LookAt(target);
+        }
     }
 }
