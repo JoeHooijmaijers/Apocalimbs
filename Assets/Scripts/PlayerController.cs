@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     void RightArmAttack()
     {
         animator.SetTrigger("RightArmAttackUnmutated");
+        
     }
 
     void LeftArmAttack()
