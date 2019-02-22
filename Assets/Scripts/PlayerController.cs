@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
+    private Animator animator;
 
     public float movementSpeed;
     public float jumpHeight;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,11 @@ public class PlayerController : MonoBehaviour
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
 
         Movement();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            RightArmAttack();
+        }
     }
 
     void Movement()
@@ -32,8 +39,10 @@ public class PlayerController : MonoBehaviour
         targetDirection = Camera.main.transform.TransformDirection(targetDirection);
         targetDirection.y = 0.0f;
         transform.Translate(targetDirection, Space.World);
-        transform.rotation = Quaternion.LookRotation(targetDirection);
-
+        if (targetDirection != new Vector3(0f, 0f, 0f))
+        {
+            transform.rotation = Quaternion.LookRotation(targetDirection);
+        }
         if (Input.GetKey("space"))
         {
             Jump();
@@ -57,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     void RightArmAttack()
     {
-
+        animator.SetTrigger("RightArmAttackUnmutated");
     }
 
     void LeftArmAttack()
