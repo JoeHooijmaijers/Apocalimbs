@@ -9,7 +9,7 @@ public class Hitbox : MonoBehaviour
     {
         if(col.tag == "Enemy")
         {
-            col.GetComponent<LivingBehaviour>().TakeDamage(damage);
+            col.GetComponent<Combat>().TakeDamage(damage);
             Debug.Log(col);
         }
     }
