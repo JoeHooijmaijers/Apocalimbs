@@ -355,6 +355,7 @@ MonoBehaviour:
   - {fileID: 3855283283891017350, guid: 0717fe9ad5b55264fb839ff884fbc1f2, type: 3}
   leftArms:
   - {fileID: 7615683963338900179, guid: 68be84bed82bce84eb31b61c72a1f122, type: 3}
+  anim: {fileID: 58956491}
   lArmMutation: 1
   rArmMutation: 1
   lLegMutation: 1
