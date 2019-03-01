@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
     private Animator animator;
+    public Mutation mut;
 
     public float movementSpeed;
     public float jumpHeight;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        mut = gameObject.GetComponent<Mutation>();
         animator = GetComponent<Animator>();
     }
 
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         {
             RightArmAttack();
         }
+
     }
 
     void Movement()
@@ -61,13 +64,31 @@ public class PlayerController : MonoBehaviour
 
     void DodgeRoll()
     {
-
+        animator.SetTrigger("DodgeRoll");
+        Debug.Log("BBBB");
     }
 
     void RightArmAttack()
     {
-        animator.SetTrigger("RightArmAttackUnmutated");
         
+        if(mut.rArmMutation == 0)
+        {
+            animator.SetTrigger("RightArmAttackUnmutated");
+            Debug.Log("aaa");
+        }
+        else if (mut.rArmMutation == 1 && isPlaying(animator, "RightArm_Attack_Defected"))
+        {
+            animator.SetTrigger("RightArmAttackDefected2");
+            Debug.Log("ATT2");
+        }
+        else if(mut.rArmMutation == 1)
+        {
+            animator.SetTrigger("RightArmAttackDefected");
+            Debug.Log("ATT1");
+        }
+        
+
+
     }
 
     void LeftArmAttack()
@@ -83,5 +104,17 @@ public class PlayerController : MonoBehaviour
     void LeftLegAttack()
     {
 
+    }
+
+    bool isPlaying(Animator anim, string stateName)
+    {
+        if ((anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }      
     }
 }

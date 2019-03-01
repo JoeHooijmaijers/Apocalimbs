@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class Mutation : MonoBehaviour
 {
+    public List<GameObject> rightArms;
+    public List<GameObject> leftArms;
+
     public int lArmMutation = 1, rArmMutation = 1, lLegMutation = 1, rLegMutation = 1;
     public int lArmPts, rArmPts, lLegPts, rLegsPts;
 
     private int lArmMaxPts, rArmMaxPts, lLegMaxPts, rLegsMaxPts;
 
+    private void Start()
+    {
+        Destroy(gameObject.transform.Find("RightArm/RightShoulder").gameObject);
+        GameObject newArm = (GameObject)Instantiate(rightArms[1], gameObject.transform.Find("RightArm").transform);
+        newArm.name = "RightShoulder";
+        Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
+        GameObject newArm2 = (GameObject)Instantiate(leftArms[0], gameObject.transform.Find("LeftArm").transform);
+        newArm2.name = "LeftShoulder";
+
+    }
     public void LArmAbsorb(int amount)
     {
         lArmPts += amount;
         Mutate();
+        
     }
 
     public void RArmAbsorb(int amount)
@@ -39,6 +53,7 @@ public class Mutation : MonoBehaviour
         {
             lArmMutation++;
             lArmMaxPts *= 3;
+
         }
         if(rArmPts >= rArmMaxPts)
         {
