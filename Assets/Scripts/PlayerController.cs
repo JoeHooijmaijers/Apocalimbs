@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
             RightArmAttack();
         }
 
+        if (Input.GetMouseButtonDown(2))
+        {
+            gameObject.GetComponent<Mutation>().MutateTemp();
+        }
+
     }
 
     void Movement()

@@ -6,6 +6,7 @@ public class Mutation : MonoBehaviour
 {
     public List<GameObject> rightArms;
     public List<GameObject> leftArms;
+    public Animator anim;
 
     public int lArmMutation = 1, rArmMutation = 1, lLegMutation = 1, rLegMutation = 1;
     public int lArmPts, rArmPts, lLegPts, rLegsPts;
@@ -20,8 +21,13 @@ public class Mutation : MonoBehaviour
         Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
         GameObject newArm2 = (GameObject)Instantiate(leftArms[0], gameObject.transform.Find("LeftArm").transform);
         newArm2.name = "LeftShoulder";
-
     }
+
+    public void MutateTemp()
+    {
+        anim.Rebind();
+    }
+
     public void LArmAbsorb(int amount)
     {
         lArmPts += amount;
