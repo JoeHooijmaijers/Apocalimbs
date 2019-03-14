@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Combat))]
 public class Mutation : MonoBehaviour
 {
     public List<GameObject> rightArms;
     public List<GameObject> leftArms;
     public Animator anim;
 
-    public int lArmMutation = 1, rArmMutation = 1, lLegMutation = 1, rLegMutation = 1;
+    public int lArmMutation = 0, rArmMutation = 0, lLegMutation = 0, rLegMutation = 0;
     public int lArmPts, rArmPts, lLegPts, rLegsPts;
 
-    private int lArmMaxPts, rArmMaxPts, lLegMaxPts, rLegsMaxPts;
+   [SerializeField]private int lArmMaxPts, rArmMaxPts, lLegMaxPts, rLegsMaxPts;
 
     private void Start()
     {
         Destroy(gameObject.transform.Find("RightArm/RightShoulder").gameObject);
-        GameObject newArm = (GameObject)Instantiate(rightArms[1], gameObject.transform.Find("RightArm").transform);
+        GameObject newArm = (GameObject)Instantiate(rightArms[rArmMutation], gameObject.transform.Find("RightArm").transform);
         newArm.name = "RightShoulder";
         Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
         GameObject newArm2 = (GameObject)Instantiate(leftArms[0], gameObject.transform.Find("LeftArm").transform);
@@ -28,28 +29,12 @@ public class Mutation : MonoBehaviour
         anim.Rebind();
     }
 
-    public void LArmAbsorb(int amount)
+    public void AbsorbMutations(int lArmAmount, int rArmAmount, int lLegAmount, int rLegAmount)
     {
-        lArmPts += amount;
-        Mutate();
-        
-    }
-
-    public void RArmAbsorb(int amount)
-    {
-        rArmPts += amount;
-        Mutate();
-    }
-
-    public void LLegAbsorb(int amount)
-    {
-        lLegPts += amount;
-        Mutate();
-    }
-
-    public void RLegAbsorb(int amount)
-    {
-        rLegsPts += amount;
+        lArmPts += lArmAmount;
+        rArmPts += rArmAmount;
+        lLegPts += lLegAmount;
+        rLegsPts += rLegAmount;
         Mutate();
     }
 
@@ -58,12 +43,19 @@ public class Mutation : MonoBehaviour
         if(lArmPts >= lArmMaxPts)
         {
             lArmMutation++;
+            Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
+            GameObject newArm = (GameObject)Instantiate(leftArms[lArmMutation], gameObject.transform.Find("LeftArm").transform);
+            newArm.name = "LeftShoulder";
+            gameObject.GetComponent<Animator>().Rebind();
             lArmMaxPts *= 3;
-
         }
         if(rArmPts >= rArmMaxPts)
         {
             rArmMutation++;
+            Destroy(gameObject.transform.Find("RightArm/RightShoulder").gameObject);
+            GameObject newArm = (GameObject)Instantiate(rightArms[rArmMutation], gameObject.transform.Find("RightArm").transform);
+            newArm.name = "RightShoulder";
+            gameObject.GetComponent<Animator>().Rebind();
             rArmMaxPts *= 3;
         }
         if(lLegPts >= lLegMaxPts)
