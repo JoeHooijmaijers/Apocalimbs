@@ -9,7 +9,8 @@ public class EnemyController : MonoBehaviour
     public float awareness = 6f;
     public float vision = 10f;
     public float turnSpeed = 5f;
-    float distance = Vector3.Distance(target.position, transform.position);
+    //Commented this out since it didn't work, sorry max
+    //float distance = Vector3.Distance(target.position, transform.position);
 
     Transform target;
     NavMeshAgent agent;
@@ -24,23 +25,23 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {             
-        if (distance <= awareness)
-        {
-            inRange();
+        //if (distance <= awareness)
+        //{
+        //    inRange();
             
-        }
+        //}
     }
 
     private void inRange()
     {
-        agent.SetDestination(target.position);
-        if (distance <= agent.stoppingDistance)
-        {
-            //lunge
+        //agent.SetDestination(target.position);
+        //if (distance <= agent.stoppingDistance)
+        //{
+        //    //lunge
 
-            //Face target
-            FaceTarget();
-        }
+        //    //Face target
+        //    FaceTarget();
+        //}
     }
 
     private void FaceTarget()

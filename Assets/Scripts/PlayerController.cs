@@ -79,21 +79,15 @@ public class PlayerController : MonoBehaviour
         if(mut.rArmMutation == 0)
         {
             animator.SetTrigger("RightArmAttackUnmutated");
-            Debug.Log("aaa");
         }
-        else if (mut.rArmMutation == 1 && isPlaying(animator, "RightArm_Attack_Defected"))
+        else if (mut.rArmMutation == 1 && IsPlaying(animator, "RightArm_Attack_Defected"))
         {
             animator.SetTrigger("RightArmAttackDefected2");
-            Debug.Log("ATT2");
         }
         else if(mut.rArmMutation == 1)
         {
             animator.SetTrigger("RightArmAttackDefected");
-            Debug.Log("ATT1");
         }
-        
-
-
     }
 
     void LeftArmAttack()
@@ -111,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    bool isPlaying(Animator anim, string stateName)
+    bool IsPlaying(Animator anim, string stateName)
     {
         if ((anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f))
         {

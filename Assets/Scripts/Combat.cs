@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class    Combat : MonoBehaviour
+[RequireComponent(typeof(Mutation))]
+public class Combat : MonoBehaviour
 {
     private int maxHealth;
     public int health;
 
+    private Mutation mut;
     public int rArmAttackPower;
     public int rLegAttackPower;
 
     public int defense;
 
-    public void TakeDamage(int damage)
+    private void Start()
+    {
+        mut = gameObject.GetComponent<Mutation>();
+    }
+
+    public void TakeDamage(int damage, GameObject damagesource)
     {
         if(damage - defense <= 0)
         {
@@ -25,12 +32,13 @@ public class    Combat : MonoBehaviour
         
         if(health <= 0)
         {
-            Die();
+            Die(damagesource);
         }
     }
 
-    public void Die()
+    public void Die(GameObject killer)
     {
+        killer.GetComponent<Mutation>().AbsorbMutations(mut.lArmPts, mut.rArmPts, mut.lLegPts, mut.rLegsPts);
         Destroy(gameObject);
         //GameObject ragdoll = (GameObject)Instantiate(aa, transform.position, transform.rotation);
     }
