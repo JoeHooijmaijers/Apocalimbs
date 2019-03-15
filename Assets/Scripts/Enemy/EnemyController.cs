@@ -21,7 +21,8 @@ public class EnemyController : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        Debug.Log(animator);
     }
 
     // Update is called once per frame
@@ -30,15 +31,9 @@ public class EnemyController : MonoBehaviour
         distance = Vector3.Distance(target.position, transform.position);
        
         if (distance <= awareness)
-        {
-            Debug.Log("InRange");
+        {   
             InRange(distance);
         }
-        //if (distance <= awareness)
-        //{
-        //    inRange();
-            
-        //}
     }
 
     private void InRange(float Distance)
