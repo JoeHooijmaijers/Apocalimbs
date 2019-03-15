@@ -22,7 +22,6 @@ public class EnemyController : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponentInChildren<Animator>();
-        Debug.Log(animator);
     }
 
     // Update is called once per frame
@@ -39,14 +38,17 @@ public class EnemyController : MonoBehaviour
     private void InRange(float Distance)
     {
         Vector3 LastSeen = new Vector3(target.position.x, target.position.y, target.position.z);
-        nav.SetDestination(LastSeen);
         FaceTarget();
         if (Distance <= nav.stoppingDistance)
         {
             //Lunge
-            animator.SetTrigger("InLungeRange");
+            animator.SetTrigger("Lunge");
             Debug.Log("Lekker Lungen");
-            //Face target
+        }
+
+        else
+        {
+            nav.SetDestination(LastSeen);
         }
         //agent.SetDestination(target.position);
         //if (distance <= agent.stoppingDistance)
@@ -58,11 +60,11 @@ public class EnemyController : MonoBehaviour
         //}
     }
 
-    private void Lunge()
-    {
-        transform.position = Vector3.Slerp(transform.position, new Vector3(target.position.x, target.position.y, target.position.z), Time.deltaTime * timeAirborne);
+    //private void Lunge()
+    //{
+    //    transform.position = Vector3.Slerp(transform.position, new Vector3(target.position.x, target.position.y, target.position.z), Time.deltaTime * timeAirborne);
         
-    }
+    //}
 
     private void OnTriggerStay(Collider col)
     {
