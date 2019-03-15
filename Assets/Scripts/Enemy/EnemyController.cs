@@ -11,18 +11,10 @@ public class EnemyController : MonoBehaviour
     Animator animator;
     public float awareness = 6f;
     public float vision = 10f;
-<<<<<<< HEAD
     public float turnSpeed = 3f;
     public float timeAirborne = 1f;
     private float distance;
-=======
-    public float turnSpeed = 5f;
-    //Commented this out since it didn't work, sorry max
-    //float distance = Vector3.Distance(target.position, transform.position);
 
-    Transform target;
-    NavMeshAgent agent;
->>>>>>> c324ed19ffca803140ee4a04b8e073196e35b453
 
     // Start is called before the first frame update
     void Awake()
@@ -34,7 +26,6 @@ public class EnemyController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-<<<<<<< HEAD
     {
         distance = Vector3.Distance(target.position, transform.position);
        
@@ -43,19 +34,15 @@ public class EnemyController : MonoBehaviour
             Debug.Log("InRange");
             InRange(distance);
         }
-=======
-    {             
         //if (distance <= awareness)
         //{
         //    inRange();
             
         //}
->>>>>>> c324ed19ffca803140ee4a04b8e073196e35b453
     }
 
     private void InRange(float Distance)
     {
-<<<<<<< HEAD
         Vector3 LastSeen = new Vector3(target.position.x, target.position.y, target.position.z);
         nav.SetDestination(LastSeen);
         FaceTarget();
@@ -66,7 +53,6 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Lekker Lungen");
             //Face target
         }
-=======
         //agent.SetDestination(target.position);
         //if (distance <= agent.stoppingDistance)
         //{
@@ -75,7 +61,6 @@ public class EnemyController : MonoBehaviour
         //    //Face target
         //    FaceTarget();
         //}
->>>>>>> c324ed19ffca803140ee4a04b8e073196e35b453
     }
 
     private void Lunge()

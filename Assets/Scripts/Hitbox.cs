@@ -13,12 +13,9 @@ public class Hitbox : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-<<<<<<< HEAD
         if(col.tag == "Enemy" || col.tag == "Player")
-=======
 
         if(col.tag == "Enemy")
->>>>>>> c324ed19ffca803140ee4a04b8e073196e35b453
         {
             col.GetComponent<Combat>().TakeDamage(damage, par);
             Debug.Log(par.GetComponent<Mutation>().rArmPts + " and lv: " +par.GetComponent<Mutation>().rArmMutation);
