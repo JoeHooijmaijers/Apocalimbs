@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public GameObject door;
-    public Animator anim;
+    Animator anim;
 
-    private void Awake()
+    private void Start()
     {
         anim = gameObject.GetComponent<Animator>();
     }
@@ -19,8 +18,9 @@ public class Door : MonoBehaviour
         
     }
 
-    void OpenDoor()
+    public void OpenDoor()
     {
         anim.SetTrigger("OpenDoor");
+        
     }
 }

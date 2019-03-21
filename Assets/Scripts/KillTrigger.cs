@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class KillTrigger : MonoBehaviour
 {
+    public GameObject activatableObj;
+    public GameObject wreckage;
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,14 @@ public class KillTrigger : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        collision.gameObject.GetComponent<Combat>().Die(player);
+        activatableObj.GetComponent<Door>().OpenDoor();
+
+        GameObject brokentrigger = (GameObject)Instantiate(wreckage, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
