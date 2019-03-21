@@ -5,6 +5,12 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public GameObject door;
+    public Animator anim;
+
+    private void Awake()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
 
 
     // Update is called once per frame
@@ -15,6 +21,6 @@ public class Door : MonoBehaviour
 
     void OpenDoor()
     {
-
+        anim.SetTrigger("OpenDoor");
     }
 }
