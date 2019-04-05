@@ -16,7 +16,7 @@ public class Hitbox : MonoBehaviour
         if (col.tag == "Enemy")
         {
             Vector3 hitDirection = col.transform.position - par.transform.position;
-            col.GetComponent<AIMovement>().Knockback(hitDirection);
+            col.GetComponent<EnemyController>().Knockback(hitDirection);
 
             col.GetComponent<Combat>().TakeDamage(damage, par);
 

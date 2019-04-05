@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     Transform target;
     NavMeshAgent nav;
     Animator animator;
+    Rigidbody rb;
+
     public float awareness = 6f;
     public float turnSpeed = 3f;
     private float distance;
@@ -20,6 +22,7 @@ public class EnemyController : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -63,5 +66,11 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, awareness);
+    }
+
+    public void Knockback(Vector3 Direction)
+    {
+        rb.AddForce(Direction * 10, ForceMode.Impulse);
+        //###Doesn't work properly!### kinda
     }
 }
