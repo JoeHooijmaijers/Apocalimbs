@@ -29,7 +29,9 @@ public class Combat : MonoBehaviour
         {
             health -= damage - defense;
         }
-        
+
+        Debug.Log(health);
+
         if(health <= 0)
         {
             Die(damagesource);

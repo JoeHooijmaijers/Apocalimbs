@@ -10,61 +10,36 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent nav;
     Animator animator;
     public float awareness = 6f;
-    public float vision = 10f;
     public float turnSpeed = 3f;
-    public float timeAirborne = 1f;
     private float distance;
+    public string triggerName;
 
-
-    // Start is called before the first frame update
+   
     void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         distance = Vector3.Distance(target.position, transform.position);
        
         if (distance <= awareness)
-        {   
+        {
+            FaceTarget();
             InRange(distance);
         }
     }
 
     private void InRange(float Distance)
     {
-        Vector3 LastSeen = new Vector3(target.position.x, target.position.y, target.position.z);
-        FaceTarget();
         if (Distance <= nav.stoppingDistance)
         {
-            //Lunge
-            animator.SetTrigger("Lunge");
-            Debug.Log("Lekker Lungen");
+            animator.SetTrigger(triggerName);
         }
-
-        else
-        {
-            nav.SetDestination(LastSeen);
-        }
-        //agent.SetDestination(target.position);
-        //if (distance <= agent.stoppingDistance)
-        //{
-        //    //lunge
-
-        //    //Face target
-        //    FaceTarget();
-        //}
     }
-
-    //private void Lunge()
-    //{
-    //    transform.position = Vector3.Slerp(transform.position, new Vector3(target.position.x, target.position.y, target.position.z), Time.deltaTime * timeAirborne);
-        
-    //}
 
     private void OnTriggerStay(Collider col)
     {
@@ -74,13 +49,6 @@ public class EnemyController : MonoBehaviour
             nav.SetDestination(LastSeen);
             InRange(distance);
         }
-        //Vector3 position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        //Vector3 cov = this.transform.forward;
-
-        //if (Physics.Raycast(position, cov, vision))
-        //{
-        //    Debug.DrawLine(position, cov, Color.red);
-        //}
     }
 
     private void FaceTarget()
