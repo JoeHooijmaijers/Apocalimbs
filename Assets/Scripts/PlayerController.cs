@@ -12,7 +12,11 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight;
     public float rotationSpeed;
 
+    public float invincibletime;
+    public float stuntime;
+
     float distanceToGround;
+
 
     // Use this for initialization
     void Start()
@@ -27,17 +31,29 @@ public class PlayerController : MonoBehaviour
     {
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
 
-        Movement();
-
-        if (Input.GetMouseButtonDown(0))
+        if(stuntime <= 0)
         {
-            RightArmAttack();
-        }
+            Movement();
+            if (Input.GetMouseButtonDown(0))
+            {
+                RightArmAttack();
+            }
 
-        if (Input.GetMouseButtonDown(2))
-        {
-            gameObject.GetComponent<Mutation>().MutateTemp();
+            if (Input.GetMouseButtonDown(2))
+            {
+                gameObject.GetComponent<Mutation>().MutateTemp();
+            }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                DodgeRoll();
+            }
         }
+        else
+        {
+            stuntime -= Time.deltaTime;
+        }
+        
 
     }
 
@@ -51,26 +67,46 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(targetDirection);
         }
-        if (Input.GetKey("space"))
-        {
-            Jump();
-        }
+        //if (Input.GetKey("space"))
+        //{
+        //    Jump();
+        //}
+
+        invincibletime -= Time.deltaTime;
+        
+
     }
 
-    void Jump()
-    {
-        bool IsGrounded = Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.0f);
+    //void Jump()
+    //{
+    //    bool IsGrounded = Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.0f);
 
-        if (IsGrounded)
-        {
-            rb.velocity += jumpHeight * Vector3.up;
-        }
-    }
+    //    if (IsGrounded)
+    //    {
+    //        rb.velocity += jumpHeight * Vector3.up;
+    //    }
+    //}
 
     void DodgeRoll()
     {
-        animator.SetTrigger("DodgeRoll");
-        Debug.Log("BBBB");
+        if(Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Vertical") != 0)
+        {
+            //RollDirection
+            Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime);
+            //directional dodgeroll costing 1 Radpoint
+            rb.AddForce(targetDirection * 10, ForceMode.Impulse);
+            invincibletime = 0.5f;
+        }
+        else
+        {
+            //quick, short distance backstep costing no Radpoints
+        }
+    }
+
+    public void Knockback(Vector3 Direction)
+    {
+        rb.AddForce(Direction*10, ForceMode.Impulse);
+        invincibletime = 1.0f;
     }
 
     void RightArmAttack()
@@ -97,12 +133,12 @@ public class PlayerController : MonoBehaviour
 
     void RightLegAttack()
     {
-
+        //won't be implemented due to time constraints
     }
 
     void LeftLegAttack()
     {
-
+        //won't be implemented due to time constraints
     }
 
     bool IsPlaying(Animator anim, string stateName)
