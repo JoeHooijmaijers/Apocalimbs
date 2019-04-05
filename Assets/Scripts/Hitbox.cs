@@ -13,12 +13,22 @@ public class Hitbox : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        if(col.tag == "Enemy" || col.tag == "Player")
-
-        if(col.tag == "Enemy")
+        if (col.tag == "Enemy")
         {
+            Vector3 hitDirection = col.transform.position - par.transform.position;
+            col.GetComponent<AIMovement>().Knockback(hitDirection);
+
             col.GetComponent<Combat>().TakeDamage(damage, par);
-            Debug.Log(par.GetComponent<Mutation>().rArmPts + " and lv: " +par.GetComponent<Mutation>().rArmMutation);
+
+        }
+
+        if(col.tag == "Player")
+        {
+            Vector3 hitDirection = col.transform.position - par.transform.position;
+            col.GetComponent<PlayerController>().Knockback(hitDirection);
+
+            col.GetComponent<Combat>().TakeDamage(damage, par);
+            Debug.Log(par.GetComponent<Mutation>().rArmPts + " and lv: " + par.GetComponent<Mutation>().rArmMutation);
         }
     }
 
