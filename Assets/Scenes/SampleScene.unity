@@ -316,10 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   mut: {fileID: 0}
-  movementSpeed: 10
-  jumpHeight: 3
-  rotationSpeed: 5
-  dodgerollSpeed: 700
+  stats: {fileID: 11400000, guid: f5c0baf7a6ad8c043856cc868523a0f1, type: 2}
 --- !u!95 &58956491
 Animator:
   serializedVersion: 3

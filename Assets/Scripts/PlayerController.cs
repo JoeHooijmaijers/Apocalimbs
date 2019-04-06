@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     public Mutation mut;
 
-    public float movementSpeed;
-    public float jumpHeight;
-    public float rotationSpeed;
-    public float dodgerollSpeed;
+    public PlayerStats stats;
+
+    //public float movementSpeed;
+    //public float jumpHeight;
+    //public float rotationSpeed;
+    //public float dodgerollSpeed;
 
     private float invincibletime;
     private float stuntime;
@@ -59,19 +61,20 @@ public class PlayerController : MonoBehaviour
         {
             invincibletime -= Time.deltaTime;
         }
-        
+        stats.rollSpeed--;
 
     }
 
     void Movement()
     {
-        Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime);
+        Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * stats.movementSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") * stats.movementSpeed * Time.deltaTime);
         targetDirection = Camera.main.transform.TransformDirection(targetDirection);
         targetDirection.y = 0.0f;
         transform.Translate(targetDirection, Space.World);
         if (targetDirection != new Vector3(0f, 0f, 0f))
         {
-            transform.rotation = Quaternion.LookRotation(targetDirection);
+            var targetRotation = Quaternion.LookRotation(targetDirection);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, stats.RotationSpeed * Time.deltaTime);
         }
         //if (Input.GetKey("space"))
         //{
@@ -97,7 +100,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Vertical") != 0)
         {
             //RollDirection
-            Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * dodgerollSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") *dodgerollSpeed * Time.deltaTime);
+            Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * stats.rollSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") * stats.rollSpeed * Time.deltaTime);
             targetDirection = Camera.main.transform.TransformDirection(targetDirection);
             targetDirection.y = 0.0f;
             //directional dodgeroll costing 1 Radpoint
