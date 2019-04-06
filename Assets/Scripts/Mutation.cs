@@ -22,10 +22,12 @@ public class Mutation : MonoBehaviour
         Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
         GameObject newArm2 = (GameObject)Instantiate(leftArms[0], gameObject.transform.Find("LeftArm").transform);
         newArm2.name = "LeftShoulder";
+        StartCoroutine(Rebind());
     }
 
-    public void MutateTemp()
+    IEnumerator Rebind()
     {
+        yield return new WaitForSeconds(0.01f);
         anim.Rebind();
     }
 
@@ -46,7 +48,7 @@ public class Mutation : MonoBehaviour
             Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
             GameObject newArm = (GameObject)Instantiate(leftArms[lArmMutation], gameObject.transform.Find("LeftArm").transform);
             newArm.name = "LeftShoulder";
-            gameObject.GetComponent<Animator>().Rebind();
+            StartCoroutine(Rebind());
             lArmMaxPts *= 3;
         }
         if(rArmPts >= rArmMaxPts)
@@ -55,7 +57,7 @@ public class Mutation : MonoBehaviour
             Destroy(gameObject.transform.Find("RightArm/RightShoulder").gameObject);
             GameObject newArm = (GameObject)Instantiate(rightArms[rArmMutation], gameObject.transform.Find("RightArm").transform);
             newArm.name = "RightShoulder";
-            gameObject.GetComponent<Animator>().Rebind();
+            StartCoroutine(Rebind());
             rArmMaxPts *= 3;
         }
         if(lLegPts >= lLegMaxPts)

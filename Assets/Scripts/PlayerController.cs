@@ -11,9 +11,10 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed;
     public float jumpHeight;
     public float rotationSpeed;
+    public float dodgerollSpeed;
 
-    public float invincibletime;
-    public float stuntime;
+    private float invincibletime;
+    private float stuntime;
 
     float distanceToGround;
 
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(2))
             {
-                gameObject.GetComponent<Mutation>().MutateTemp();
+                //gameObject.GetComponent<Mutation>().MutateTemp();
             }
 
             if (Input.GetKeyDown(KeyCode.C))
@@ -52,6 +53,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             stuntime -= Time.deltaTime;
+        }
+
+        if(invincibletime >= 0)
+        {
+            invincibletime -= Time.deltaTime;
         }
         
 
@@ -71,8 +77,7 @@ public class PlayerController : MonoBehaviour
         //{
         //    Jump();
         //}
-
-        invincibletime -= Time.deltaTime;
+        
         
 
     }
@@ -92,10 +97,15 @@ public class PlayerController : MonoBehaviour
         if(Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Vertical") != 0)
         {
             //RollDirection
-            Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime);
+            Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * dodgerollSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") *dodgerollSpeed * Time.deltaTime);
+            targetDirection = Camera.main.transform.TransformDirection(targetDirection);
+            targetDirection.y = 0.0f;
             //directional dodgeroll costing 1 Radpoint
-            rb.AddForce(targetDirection * 10, ForceMode.Impulse);
+            rb.AddForce(targetDirection, ForceMode.VelocityChange);
+            //transform.Translate(targetDirection, Space.World);
             invincibletime = 0.5f;
+            stuntime = 0.8f;
+            
         }
         else
         {
@@ -105,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     public void Knockback(Vector3 Direction)
     {
-        rb.AddForce(Direction*10, ForceMode.Impulse);
+        rb.AddForce(Direction* 6, ForceMode.Impulse);
         invincibletime = 1.0f;
     }
 
