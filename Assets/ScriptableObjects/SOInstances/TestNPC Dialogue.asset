@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2ad66cc240c8419283d8e5042f5ee, type: 3}
+  m_Name: TestNPC Dialogue
+  m_EditorClassIdentifier: 
+  name: Tilted Testman
+  dialogue:
+  - All these mutated fucks out here, can't have a single moment of peace and quiet...
+  - Oi who are you then? You here to test some dialogue?
+  - First these mutated monkeys screaming my ears off and now you!
+  - Oh lord just end me now, why don't ye?
+  - At least you don't talk too much, I guess, unlike that freak ralph.
+  - Now then, time to scurry along ye cunt, get off me lawn!
