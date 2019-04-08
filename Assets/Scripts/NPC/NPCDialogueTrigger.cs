@@ -5,18 +5,26 @@ using UnityEngine;
 [System.Serializable]
 public class NPCDialogueTrigger : MonoBehaviour
 {
-    
-    [SerializeField] private DialogueText dialogue;
+    private int talkedTo;
+    [SerializeField] private List<DialogueText> dialogues;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        talkedTo = 0;
     }
 
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        if(talkedTo > dialogues.Count - 1)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogues[dialogues.Count]);
+        }
+        else
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogues[talkedTo]);
+        }
+        talkedTo++;
     }
 
 }

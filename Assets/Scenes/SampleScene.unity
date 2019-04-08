@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 404820196}
   - component: {fileID: 404820195}
   m_Layer: 5
-  m_Name: TestButton2
+  m_Name: ContinueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3360,7 +3360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2f00a9f69d6324c8260a73b4c71c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: {fileID: 11400000, guid: 1d9a5c94380e8dd47aeaabae4cbcce7c, type: 2}
+  dialogues:
+  - {fileID: 11400000, guid: 1d9a5c94380e8dd47aeaabae4cbcce7c, type: 2}
+  - {fileID: 11400000, guid: a62dbac8f5b9df747b8752f8a51ec303, type: 2}
 --- !u!114 &1465168224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4506,7 +4508,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue Convo
+  m_Text: Next
 --- !u!222 &2011788851
 CanvasRenderer:
   m_ObjectHideFlags: 0

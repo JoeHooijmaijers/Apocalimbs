@@ -7,6 +7,10 @@ public class Boss1Behaviour : MonoBehaviour
 {
     public float lookRadius = 50f;
 
+    public float closeRadius = 3f;
+    public float midRadius = 10f;
+    public float farRadius = 20f;
+
     Transform target;
     NavMeshAgent agent;
 
@@ -25,6 +29,49 @@ public class Boss1Behaviour : MonoBehaviour
         if(distance <= lookRadius)
         {
             agent.SetDestination(target.position);
+        }
+    }
+
+    private void NextMove()
+    {
+        int decision = Random.Range(1, 100);
+
+        float distance = Vector4.Distance(target.position, transform.position);
+        //if player is in close range
+        if (distance < closeRadius)
+        {
+           if(decision > 60)
+            {
+                //short attack 1 or 2
+            } else if(decision <= 60 && decision > 30)
+            {
+                //strafe around player for ... seconds
+            }else if(decision <= 30)
+            {
+                //backjump away to farRange distance
+            }
+ 
+        }//if player is in mid range
+        else if(distance < midRadius)
+        {
+           if(decision > 50)
+            {
+                //mid range attack
+            }else if(decision <= 50)
+            {
+                //tackle towards player
+            }
+        }//if player is in long range
+        else if(distance < farRadius)
+        {
+            if (decision > 50)
+            {
+                //long range attack
+            }
+            else if (decision <= 50)
+            {
+                //tackle towards player
+            }
         }
     }
 
