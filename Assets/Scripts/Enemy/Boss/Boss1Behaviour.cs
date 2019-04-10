@@ -11,14 +11,19 @@ public class Boss1Behaviour : MonoBehaviour
     public float midRadius = 10f;
     public float farRadius = 20f;
 
+    [SerializeField]private bool canMove = true;
+    [SerializeField]private bool canAttack = true;
+
     Transform target;
     NavMeshAgent agent;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,7 +33,15 @@ public class Boss1Behaviour : MonoBehaviour
 
         if(distance <= lookRadius)
         {
-            agent.SetDestination(target.position);
+            if (canMove == true)
+            {
+                agent.SetDestination(target.position);
+            }
+            if (canAttack)
+            {
+                NextMove();
+            }
+            
         }
     }
 
@@ -42,7 +55,7 @@ public class Boss1Behaviour : MonoBehaviour
         {
            if(decision > 60)
             {
-                //short attack 1 or 2
+                ShortAttack();
             } else if(decision <= 60 && decision > 30)
             {
                 //strafe around player for ... seconds
@@ -56,7 +69,7 @@ public class Boss1Behaviour : MonoBehaviour
         {
            if(decision > 50)
             {
-                //mid range attack
+                MidAttack();
             }else if(decision <= 50)
             {
                 //tackle towards player
@@ -75,9 +88,42 @@ public class Boss1Behaviour : MonoBehaviour
         }
     }
 
+    private void ShortAttack()
+    {
+        int rnd = Random.Range(1, 3);
+        if(rnd == 1)
+        {
+            anim.SetTrigger("ShortAttack1");
+        }
+        else
+        {
+            anim.SetTrigger("ShortAttack2");
+        }
+    }
+
+    private void GapCloser()
+    {
+        anim.SetTrigger("Gapcloser");
+    }
+
+    private void MidAttack()
+    {
+        anim.SetTrigger("MidAttack1");
+    }
+
+    private void FarAttack()
+    {
+        anim.SetTrigger("FarAttack");
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, closeRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, midRadius);
+
     }
 }

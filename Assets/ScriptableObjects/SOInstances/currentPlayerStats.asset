@@ -15,4 +15,4 @@ MonoBehaviour:
   movementSpeed: 10
   jumpHeight: 3
   RotationSpeed: 10
-  rollSpeed: 700
+  rollSpeed: 125

@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             invincibletime -= Time.deltaTime;
         }
-        stats.rollSpeed--;
+
 
     }
 
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
             targetDirection = Camera.main.transform.TransformDirection(targetDirection);
             targetDirection.y = 0.0f;
             //directional dodgeroll costing 1 Radpoint
-            rb.AddForce(targetDirection, ForceMode.VelocityChange);
+            rb.AddForce(targetDirection, ForceMode.Impulse);
             //transform.Translate(targetDirection, Space.World);
             invincibletime = 0.5f;
             stuntime = 0.8f;
