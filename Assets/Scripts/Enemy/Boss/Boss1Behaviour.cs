@@ -79,7 +79,7 @@ public class Boss1Behaviour : MonoBehaviour
         {
             if (decision > 50)
             {
-                //long range attack
+                FarAttack();
             }
             else if (decision <= 50)
             {
@@ -101,6 +101,11 @@ public class Boss1Behaviour : MonoBehaviour
         }
     }
 
+    private void WalkAround()
+    {
+
+    }
+
     private void GapCloser()
     {
         anim.SetTrigger("Gapcloser");
@@ -113,7 +118,7 @@ public class Boss1Behaviour : MonoBehaviour
 
     private void FarAttack()
     {
-        anim.SetTrigger("FarAttack");
+        anim.SetTrigger("FarAttack1");
     }
 
     private void OnDrawGizmosSelected()
