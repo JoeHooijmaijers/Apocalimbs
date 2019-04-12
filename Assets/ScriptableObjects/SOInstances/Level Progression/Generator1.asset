@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3074a480c0c09f04d941b1f0bfca50b1, type: 3}
-  m_Name: currentPlayerStats
+  m_Script: {fileID: 11500000, guid: c16c48c388282104dbb640a335421513, type: 3}
+  m_Name: Generator1
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  jumpHeight: 3
-  RotationSpeed: 10
-  rollSpeed: 700
+  cleared: 0

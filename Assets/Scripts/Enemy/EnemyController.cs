@@ -68,9 +68,9 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, awareness);
     }
 
-    public void Knockback(Vector3 Direction)
+    public void Knockback(Vector3 Direction, int force)
     {
-        rb.AddForce(Direction * 10, ForceMode.Impulse);
+        rb.AddForce(Direction * force, ForceMode.Impulse);
         //###Doesn't work properly!### kinda
     }
 }

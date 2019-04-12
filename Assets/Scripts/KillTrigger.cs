@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class KillTrigger : MonoBehaviour
 {
-    public GameObject activatableObj;
+    public GameEvent gameEvent;
+    public TriggerState state;
+    
     public GameObject wreckage;
     public GameObject player;
 
@@ -20,12 +22,16 @@ public class KillTrigger : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        collision.gameObject.GetComponent<Combat>().Die(player);
-        activatableObj.GetComponent<Door>().OpenDoor();
-
-        GameObject brokentrigger = (GameObject)Instantiate(wreckage, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if (col.tag != "Player")
+        {
+            col.gameObject.GetComponent<Combat>().Die(player);
+            //activatableObj.GetComponent<Door>().OpenDoor();
+            state.ClearState();
+            gameEvent.Raise();
+            GameObject brokentrigger = (GameObject)Instantiate(wreckage, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }

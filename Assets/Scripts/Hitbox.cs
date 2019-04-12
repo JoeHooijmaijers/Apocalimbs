@@ -10,25 +10,40 @@ public class Hitbox : MonoBehaviour
     private void Start()
     {
         par = transform.root.gameObject;
+        if(gameObject.tag != "Projectile")
+        {
+            damage = gameObject.GetComponentInParent<Combat>().ArmAttackPower;
+        }
     }
     private void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Enemy")
         {
             Vector3 hitDirection = col.transform.position - par.transform.position;
-            col.GetComponent<EnemyController>().Knockback(hitDirection);
+            int force = GetComponentInParent<Combat>().knockbackforce;
+            col.GetComponent<EnemyController>().Knockback(hitDirection, force);
 
             col.GetComponent<Combat>().TakeDamage(damage, par);
 
         }
 
-        if(col.tag == "Player")
+        if (col.tag == "Boss")
         {
             Vector3 hitDirection = col.transform.position - par.transform.position;
-            col.GetComponent<PlayerController>().Knockback(hitDirection);
+            int force = GetComponentInParent<Combat>().knockbackforce;
+            col.GetComponent<Boss1Behaviour>().Knockback(hitDirection, force);
 
             col.GetComponent<Combat>().TakeDamage(damage, par);
-            Debug.Log(par.GetComponent<Mutation>().rArmPts + " and lv: " + par.GetComponent<Mutation>().rArmMutation);
+
+        }
+
+        if (col.tag == "Player")
+        {
+            Vector3 hitDirection = col.transform.position - par.transform.position;
+            int force = GetComponentInParent<Combat>().knockbackforce;
+            col.GetComponent<PlayerController>().Knockback(hitDirection, force);
+
+            col.GetComponent<Combat>().TakeDamage(damage, par);
         }
     }
 

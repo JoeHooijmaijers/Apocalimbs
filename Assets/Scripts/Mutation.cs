@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Combat))]
 public class Mutation : MonoBehaviour
 {
     public List<GameObject> rightArms;

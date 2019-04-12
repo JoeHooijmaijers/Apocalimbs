@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Vertical") != 0)
         {
             //RollDirection
-            Vector3 targetDirection = new Vector3(Input.GetAxis("Horizontal") * stats.rollSpeed * Time.deltaTime, 0f, Input.GetAxis("Vertical") * stats.rollSpeed * Time.deltaTime);
+            Vector3 targetDirection = new Vector3(Input.GetAxisRaw("Horizontal") * stats.rollSpeed * Time.deltaTime, 0f, Input.GetAxisRaw("Vertical") * stats.rollSpeed * Time.deltaTime);
             targetDirection = Camera.main.transform.TransformDirection(targetDirection);
             targetDirection.y = 0.0f;
             //directional dodgeroll costing 1 Radpoint
@@ -116,9 +116,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Knockback(Vector3 Direction)
+    public void Knockback(Vector3 Direction, int force)
     {
-        rb.AddForce(Direction* 6, ForceMode.Impulse);
+        rb.AddForce(Direction* 2, ForceMode.Impulse);
         invincibletime = 1.0f;
     }
 

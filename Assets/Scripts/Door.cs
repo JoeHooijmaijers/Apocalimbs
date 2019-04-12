@@ -5,22 +5,28 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     Animator anim;
+    public TriggerState state;
 
     private void Start()
     {
         anim = gameObject.GetComponent<Animator>();
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OpenDoor()
     {
-        anim.SetTrigger("OpenDoor");
-        
+        anim.SetTrigger("OpenDoor"); 
+    }
+
+    public void DoorState()
+    {
+        if (state.cleared == true)
+        {
+            anim.SetTrigger("OpenDoor");
+            anim.SetBool("IsOpen", true);
+        }
+        else
+        {
+            anim.SetBool("IsOpen", false);
+        }
     }
 }

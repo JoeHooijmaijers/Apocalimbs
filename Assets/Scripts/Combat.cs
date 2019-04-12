@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Mutation))]
 public class Combat : MonoBehaviour
 {
     private int maxHealth;
     public int health;
 
     private Mutation mut;
-    public int rArmAttackPower;
-    public int rLegAttackPower;
+    public int ArmAttackPower;
 
+    public int knockbackforce;
     public int defense;
 
     private void Start()

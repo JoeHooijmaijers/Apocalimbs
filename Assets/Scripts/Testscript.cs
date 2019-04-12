@@ -21,7 +21,7 @@ public class Testscript : MonoBehaviour
         if(other.tag == "Player")
         {
             Vector3 hitDirection = other.transform.position - transform.position;
-            other.GetComponent<PlayerController>().Knockback(hitDirection);
+            other.GetComponent<PlayerController>().Knockback(hitDirection, 4);
             Debug.Log("AAA");
         }
     }

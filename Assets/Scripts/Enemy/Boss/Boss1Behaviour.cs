@@ -17,6 +17,7 @@ public class Boss1Behaviour : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     Animator anim;
+    Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class Boss1Behaviour : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -88,8 +90,18 @@ public class Boss1Behaviour : MonoBehaviour
         }
     }
 
+    public void Knockback(Vector3 Direction, int force)
+    {
+        rb.AddForce(Direction * force, ForceMode.Impulse);
+    }
+
     private void ShortAttack()
     {
+
+        anim.ResetTrigger("ShortAttack1");
+        anim.ResetTrigger("ShortAttack2");
+        anim.ResetTrigger("MidAttack1");
+        anim.ResetTrigger("FarAttack1");
         int rnd = Random.Range(1, 3);
         if(rnd == 1)
         {
