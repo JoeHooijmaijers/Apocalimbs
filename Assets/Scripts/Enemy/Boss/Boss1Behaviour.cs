@@ -13,8 +13,10 @@ public class Boss1Behaviour : MonoBehaviour
 
     [SerializeField]private bool canMove = true;
     [SerializeField]private bool canAttack = true;
+    private float Walking = 0.0f;
 
     Transform target;
+    Vector3 walktarget;
     NavMeshAgent agent;
     Animator anim;
     Rigidbody rb;
@@ -35,15 +37,29 @@ public class Boss1Behaviour : MonoBehaviour
 
         if(distance <= lookRadius)
         {
-            if (canMove == true)
+            if(Walking > 0.0f)
+            {
+                ClearAllTriggers();
+                Walking -= Time.deltaTime;
+                agent.SetDestination(walktarget);
+                Vector3 lookTarget = new Vector3(target.position.x, this.transform.position.y, target.position.z);
+                transform.rotation = Quaternion.LookRotation(lookTarget);
+                canAttack = false;
+
+                if(Walking <=  0.0)
+                {
+                    canAttack = true;
+                }
+            }
+            else if (canMove == true)
             {
                 agent.SetDestination(target.position);
             }
+            
             if (canAttack)
             {
                 NextMove();
-            }
-            
+            }         
         }
     }
 
@@ -97,11 +113,7 @@ public class Boss1Behaviour : MonoBehaviour
 
     private void ShortAttack()
     {
-
-        anim.ResetTrigger("ShortAttack1");
-        anim.ResetTrigger("ShortAttack2");
-        anim.ResetTrigger("MidAttack1");
-        anim.ResetTrigger("FarAttack1");
+        ClearAllTriggers();
         int rnd = Random.Range(1, 3);
         if(rnd == 1)
         {
@@ -113,23 +125,36 @@ public class Boss1Behaviour : MonoBehaviour
         }
     }
 
+    private void ClearAllTriggers()
+    {
+        anim.ResetTrigger("ShortAttack1");
+        anim.ResetTrigger("ShortAttack2");
+        anim.ResetTrigger("MidAttack1");
+        anim.ResetTrigger("FarAttack1");
+    }
     private void WalkAround()
     {
-
+        walktarget = Random.onUnitSphere * 5;
+        walktarget.y = 0;
+        float walktime = Random.Range(1.0f, 4.0f);
+        Walking = walktime;
     }
 
     private void GapCloser()
     {
+        ClearAllTriggers();
         anim.SetTrigger("Gapcloser");
     }
 
     private void MidAttack()
     {
+        ClearAllTriggers();
         anim.SetTrigger("MidAttack1");
     }
 
     private void FarAttack()
     {
+        ClearAllTriggers();
         anim.SetTrigger("FarAttack1");
     }
 
@@ -141,6 +166,5 @@ public class Boss1Behaviour : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, closeRadius);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, midRadius);
-
     }
 }

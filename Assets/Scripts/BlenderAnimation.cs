@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class BlenderAnimation : MonoBehaviour
 {
-    public Animator anim;
-
+    private Animator[] anim;
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentsInChildren<Animator>();
     }
+
 
     public void StartBlenderAnim(string animtrigger)
     {
-        anim.SetTrigger(animtrigger);
+        foreach(Animator ani in anim)
+        {
+            ani.SetTrigger(animtrigger);
+        }
+       
     }
 }

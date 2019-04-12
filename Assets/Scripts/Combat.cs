@@ -39,7 +39,11 @@ public class Combat : MonoBehaviour
 
     public void Die(GameObject killer)
     {
-        killer.GetComponent<Mutation>().AbsorbMutations(mut.lArmPts, mut.rArmPts, mut.lLegPts, mut.rLegsPts);
+        if(killer.tag != "Boss")
+        {
+            killer.GetComponent<Mutation>().AbsorbMutations(mut.lArmPts, mut.rArmPts, mut.lLegPts, mut.rLegsPts);
+        }
+        
         Destroy(gameObject);
         //GameObject ragdoll = (GameObject)Instantiate(aa, transform.position, transform.rotation);
     }
