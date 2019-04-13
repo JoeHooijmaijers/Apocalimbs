@@ -17,25 +17,29 @@ public class Hitbox : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Enemy")
+        if(par.tag == "Player")
         {
-            Vector3 hitDirection = col.transform.position - par.transform.position;
-            int force = GetComponentInParent<Combat>().knockbackforce;
-            col.GetComponent<EnemyController>().Knockback(hitDirection, force);
+            if (col.tag == "Enemy")
+            {
+                Vector3 hitDirection = col.transform.position - par.transform.position;
+                int force = GetComponentInParent<Combat>().knockbackforce;
+                col.GetComponent<EnemyController>().Knockback(hitDirection, force);
 
-            col.GetComponent<Combat>().TakeDamage(damage, par);
+                col.GetComponent<Combat>().TakeDamage(damage, par);
 
+            }
+
+            if (col.tag == "Boss")
+            {
+                Vector3 hitDirection = col.transform.position - par.transform.position;
+                int force = GetComponentInParent<Combat>().knockbackforce;
+                col.GetComponent<Boss1Behaviour>().Knockback(hitDirection, force);
+
+                col.GetComponent<Combat>().TakeDamage(damage, par);
+
+            }
         }
-
-        if (col.tag == "Boss")
-        {
-            Vector3 hitDirection = col.transform.position - par.transform.position;
-            int force = GetComponentInParent<Combat>().knockbackforce;
-            col.GetComponent<Boss1Behaviour>().Knockback(hitDirection, force);
-
-            col.GetComponent<Combat>().TakeDamage(damage, par);
-
-        }
+        
 
         if (col.tag == "Player")
         {

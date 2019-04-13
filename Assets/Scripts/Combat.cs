@@ -39,7 +39,7 @@ public class Combat : MonoBehaviour
 
     public void Die(GameObject killer)
     {
-        if(killer.tag != "Boss")
+        if(killer.tag != "Boss" || killer.tag != "Projectile")
         {
             killer.GetComponent<Mutation>().AbsorbMutations(mut.lArmPts, mut.rArmPts, mut.lLegPts, mut.rLegsPts);
         }

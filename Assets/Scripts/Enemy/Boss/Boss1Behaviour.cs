@@ -11,8 +11,11 @@ public class Boss1Behaviour : MonoBehaviour
     public float midRadius = 10f;
     public float farRadius = 20f;
 
-    [SerializeField]private bool canMove = true;
-    [SerializeField]private bool canAttack = true;
+    [SerializeField] private bool canMove = true;
+    [SerializeField] private bool canAttack = true;
+    [SerializeField] private GameObject handProjectile;
+    [SerializeField] private GameObject selfTremor;
+    [SerializeField] private GameObject tremor;
     private float Walking = 0.0f;
 
     Transform target;
@@ -61,6 +64,24 @@ public class Boss1Behaviour : MonoBehaviour
                 NextMove();
             }         
         }
+    }
+
+    public void ShootHand()
+    {
+        Instantiate(handProjectile).GetComponent<Projectile>().SetParent(this.transform);
+    }
+
+    public void TremorAttack()
+    {
+        Instantiate(selfTremor, gameObject.transform);
+        StartCoroutine(SpawnTremor(target.position));
+    }
+
+    IEnumerator SpawnTremor(Vector3 location)
+    {
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(tremor, location, Quaternion.identity);
+        StopCoroutine(SpawnTremor(location));
     }
 
     private void NextMove()
