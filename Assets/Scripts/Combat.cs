@@ -16,6 +16,12 @@ public class Combat : MonoBehaviour
     private void Start()
     {
         mut = gameObject.GetComponent<Mutation>();
+        
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void TakeDamage(int damage, GameObject damagesource)
@@ -37,14 +43,21 @@ public class Combat : MonoBehaviour
         }
     }
 
+    public void UpdateDamage()
+    {
+        if(mut!= null)
+        {
+            ArmAttackPower *= mut.rArmMutation + 1;
+        }
+    }
+
     public void Die(GameObject killer)
     {
-        if(killer.tag != "Boss" || killer.tag != "Projectile")
+        Destroy(gameObject);
+        if (killer.tag != "Boss" || killer.tag != "Projectile")
         {
             killer.GetComponent<Mutation>().AbsorbMutations(mut.lArmPts, mut.rArmPts, mut.lLegPts, mut.rLegsPts);
         }
-        
-        Destroy(gameObject);
         //GameObject ragdoll = (GameObject)Instantiate(aa, transform.position, transform.rotation);
     }
 }

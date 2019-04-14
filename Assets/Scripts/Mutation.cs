@@ -49,6 +49,7 @@ public class Mutation : MonoBehaviour
             newArm.name = "LeftShoulder";
             StartCoroutine(Rebind());
             lArmMaxPts *= 3;
+            gameObject.GetComponent<Combat>().UpdateDamage();
         }
         if(rArmPts >= rArmMaxPts)
         {
@@ -58,6 +59,7 @@ public class Mutation : MonoBehaviour
             newArm.name = "RightShoulder";
             StartCoroutine(Rebind());
             rArmMaxPts *= 3;
+            gameObject.GetComponent<Combat>().UpdateDamage();
         }
         if(lLegPts >= lLegMaxPts)
         {
@@ -69,5 +71,6 @@ public class Mutation : MonoBehaviour
             rLegMutation++;
             rLegsMaxPts *= 3;
         }
+        
     }
 }

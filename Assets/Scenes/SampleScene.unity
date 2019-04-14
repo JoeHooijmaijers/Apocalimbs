@@ -5841,6 +5841,11 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3855283282586165931, guid: 73ee4c10392022849876700cc2a771d2,
+        type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73ee4c10392022849876700cc2a771d2, type: 3}
 --- !u!1001 &5110584700742237629
@@ -6021,6 +6026,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065856650665232953, guid: 68be84bed82bce84eb31b61c72a1f122,
+        type: 3}
+      propertyPath: damage
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68be84bed82bce84eb31b61c72a1f122, type: 3}

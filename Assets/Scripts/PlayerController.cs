@@ -122,20 +122,28 @@ public class PlayerController : MonoBehaviour
         invincibletime = 1.0f;
     }
 
+    private void AttackStun(float duration)
+    {
+        stuntime = duration;
+    }
+
     void RightArmAttack()
     {
         
         if(mut.rArmMutation == 0)
         {
             animator.SetTrigger("RightArmAttackUnmutated");
+            AttackStun(0.7f);
         }
         else if (mut.rArmMutation == 1 && IsPlaying(animator, "RightArm_Attack_Defected"))
         {
             animator.SetTrigger("RightArmAttackDefected2");
+            AttackStun(0.7f);
         }
         else if(mut.rArmMutation == 1)
         {
             animator.SetTrigger("RightArmAttackDefected");
+            AttackStun(0.5f);
         }
     }
 

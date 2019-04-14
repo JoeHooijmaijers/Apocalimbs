@@ -15,6 +15,15 @@ public class Hitbox : MonoBehaviour
             damage = gameObject.GetComponentInParent<Combat>().ArmAttackPower;
         }
     }
+
+    private void Update()
+    {
+        if (gameObject.tag != "Projectile")
+        {
+            damage = gameObject.GetComponentInParent<Combat>().ArmAttackPower;
+        }
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if(par.tag == "Player")
