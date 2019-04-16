@@ -68,7 +68,7 @@ public class Boss1Behaviour : MonoBehaviour
 
     public void ShootHand()
     {
-        Instantiate(handProjectile).GetComponent<Projectile>().SetParent(this.transform);
+        Instantiate(handProjectile).GetComponent<Projectile>().SetParent(gameObject.transform);
     }
 
     public void TremorAttack()
