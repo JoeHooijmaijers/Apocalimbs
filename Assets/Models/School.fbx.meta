@@ -34,6 +34,7 @@ ModelImporter:
     400026: StaircaseHole
     400028: Stairs
     2100000: No Name
+    2100002: Stone
     2300000: CafeteriaWall
     2300002: ClassroomDoor
     2300004: ClassroomWall
@@ -76,7 +77,17 @@ ModelImporter:
     4300022: GeneratorHole
     4300024: ObstacleHole2.001
     4300026: ObstacleHole.001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 7d410ca8d5d45e9448b4e089be64d7a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone
+    second: {fileID: 2100000, guid: 2bfa56963fe41314dbd5e884c28b837e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
