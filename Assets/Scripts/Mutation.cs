@@ -15,10 +15,11 @@ public class Mutation : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject.transform.Find("RightArm/RightShoulder").gameObject);
+        anim = GetComponent<Animator>();
+        //Destroy(gameObject.transform.Find("RightArm/RightShoulder").gameObject);
         GameObject newArm = (GameObject)Instantiate(rightArms[rArmMutation], gameObject.transform.Find("RightArm").transform);
         newArm.name = "RightShoulder";
-        Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
+        //Destroy(gameObject.transform.Find("LeftArm/LeftShoulder").gameObject);
         GameObject newArm2 = (GameObject)Instantiate(leftArms[0], gameObject.transform.Find("LeftArm").transform);
         newArm2.name = "LeftShoulder";
         StartCoroutine(Rebind());

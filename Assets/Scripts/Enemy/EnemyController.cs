@@ -10,9 +10,11 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent nav;
     Animator animator;
     Rigidbody rb;
+    Mutation mut;
 
     public float awareness = 6f;
     public float turnSpeed = 3f;
+    public float attackrange = 5f;
     private float distance;
     public string triggerName;
 
@@ -23,6 +25,7 @@ public class EnemyController : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        mut = GetComponent<Mutation>();
     }
 
     void Update()
@@ -33,6 +36,11 @@ public class EnemyController : MonoBehaviour
         {
             FaceTarget();
             InRange(distance);
+        }
+
+        if(distance <= attackrange)
+        {
+            Attack();
         }
     }
 
@@ -72,5 +80,29 @@ public class EnemyController : MonoBehaviour
     {
         rb.AddForce(Direction * force, ForceMode.Impulse);
         //###Doesn't work properly!### kinda
+    }
+
+    public void Attack()
+    {
+        Vector3 lookTarget = new Vector3(target.position.x, transform.position.y, target.position.z);
+        transform.rotation = Quaternion.LookRotation(lookTarget);
+        ClearAllTriggers();
+        if(mut.rArmMutation == 0)
+        {
+            animator.SetTrigger("RA_Unmutated");
+        }else if(mut.rArmMutation == 1)
+        {
+            animator.SetTrigger("RA_Defected");
+        }else if (mut.rArmMutation == 2)
+        {
+            animator.SetTrigger("RA_Abberant");
+        }
+    }
+
+    private void ClearAllTriggers()
+    {
+        animator.ResetTrigger("RA_Unmutated");
+        animator.ResetTrigger("RA_Defected");
+        animator.ResetTrigger("RA_Abberant");
     }
 }

@@ -47,8 +47,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void SetParent(Transform Parent)
+    public void SetPositionAndParent(Vector3 spawnpos, Transform Parent)
     {
+        transform.position = spawnpos;
         parent = Parent;
     }
 

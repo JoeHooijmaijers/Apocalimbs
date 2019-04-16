@@ -10,18 +10,18 @@ public class Hitbox : MonoBehaviour
     private void Start()
     {
         par = transform.root.gameObject;
-        if(gameObject.tag != "Projectile")
-        {
-            damage = gameObject.GetComponentInParent<Combat>().ArmAttackPower;
-        }
+
+
+        damage = gameObject.GetComponentInParent<Combat>().ArmAttackPower;
+
     }
 
     private void Update()
     {
-        if (gameObject.tag != "Projectile")
-        {
-            damage = gameObject.GetComponentInParent<Combat>().ArmAttackPower;
-        }
+
+
+        damage = gameObject.GetComponentInParent<Combat>().ArmAttackPower;
+
     }
 
     private void OnTriggerEnter(Collider col)
@@ -57,6 +57,7 @@ public class Hitbox : MonoBehaviour
             col.GetComponent<PlayerController>().Knockback(hitDirection, force);
 
             col.GetComponent<Combat>().TakeDamage(damage, par);
+            Debug.Log("player is hit");
         }
     }
 

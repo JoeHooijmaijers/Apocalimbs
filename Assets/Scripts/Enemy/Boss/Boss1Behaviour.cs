@@ -68,8 +68,10 @@ public class Boss1Behaviour : MonoBehaviour
 
     public void ShootHand()
     {
-        Instantiate(handProjectile).GetComponent<Projectile>().SetParent(gameObject.transform);
+        Instantiate(handProjectile).GetComponent<Projectile>().SetPositionAndParent(transform.position, transform);
     }
+
+
 
     public void TremorAttack()
     {
@@ -79,7 +81,7 @@ public class Boss1Behaviour : MonoBehaviour
 
     IEnumerator SpawnTremor(Vector3 location)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         Instantiate(tremor, location, Quaternion.identity);
         StopCoroutine(SpawnTremor(location));
     }
