@@ -213,9 +213,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 0
-  health: 20
+  health: 200
   ArmAttackPower: 50
-  knockbackforce: 5
+  knockbackforce: 6
   defense: 1
   anim: {fileID: 0}
 --- !u!114 &3914144109726918500
