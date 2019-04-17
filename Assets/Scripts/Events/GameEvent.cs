@@ -9,7 +9,7 @@ public class GameEvent : ScriptableObject
 
     public void Raise()
     {
-        for(int i = 0; i <= GElisteners.Count -1; i--)
+        for(int i = 0; i <= GElisteners.Count -1; i++)
         {
             GElisteners[i].OnEventRaised();
         }
