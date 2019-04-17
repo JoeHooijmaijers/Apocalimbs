@@ -8,9 +8,12 @@ public class NPCInteraction : MonoBehaviour
     public GameEvent InTalkRange;
     public GameEvent OutOfTalkRange;
     public GameEvent StartTalking;
+    public GameEvent ContinueTalking;
+    public GameEvent StopTalking;
     //public GameEvent StopTalking;
 
     [SerializeField] private bool playerInRange;
+    [SerializeField] private bool talking;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +28,16 @@ public class NPCInteraction : MonoBehaviour
         if (playerInRange == true)
         {
             if (Input.GetKeyDown(KeyCode.T)){
-                StartTalking.Raise();
-                Debug.Log("memes");
+                if(talking != true)
+                {
+                    talking = true;
+                    StartTalking.Raise();
+                }
+                else
+                {
+                    ContinueTalking.Raise();
+                }
+                
             }
         }
     }
@@ -47,6 +58,11 @@ public class NPCInteraction : MonoBehaviour
         {
             playerInRange = false;
             OutOfTalkRange.Raise();
+            if (talking == true)
+            {
+                talking = false;
+                //StopTalking.Raise();
+            }
         }
     }
 
