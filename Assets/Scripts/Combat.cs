@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    private int maxHealth;
+    [SerializeField]private int maxHealth;
     public int health;
 
     private Mutation mut;
@@ -13,10 +13,12 @@ public class Combat : MonoBehaviour
     public int knockbackforce;
     public int defense;
 
+    public Animator anim;
+
     private void Start()
     {
-        mut = gameObject.GetComponent<Mutation>();
-        
+        mut =  GetComponent<Mutation>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -26,6 +28,7 @@ public class Combat : MonoBehaviour
 
     public void TakeDamage(int damage, GameObject damagesource)
     {
+        anim.SetTrigger("IsHit");
         if(damage - defense <= 0)
         {
             health -= 1;
@@ -40,6 +43,18 @@ public class Combat : MonoBehaviour
         if(health <= 0)
         {
             Die(damagesource);
+        }
+    }
+
+    public void Heal(int healing)
+    {
+        if(health + healing > maxHealth)
+        {
+            health = maxHealth;
+        }
+        else
+        {
+            health += healing;
         }
     }
 

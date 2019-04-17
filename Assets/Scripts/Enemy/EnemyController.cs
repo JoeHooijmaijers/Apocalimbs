@@ -18,6 +18,9 @@ public class EnemyController : MonoBehaviour
     private float distance;
     public string triggerName;
 
+    [SerializeField] private int maxStamina;
+    public int stamina;
+
    
     void Awake()
     {
@@ -42,6 +45,18 @@ public class EnemyController : MonoBehaviour
         {
             Attack();
         }
+    }
+
+    IEnumerator StaminaRegain(float waittime)
+    {
+        yield return new WaitForSeconds(waittime);
+        stamina += 1;
+    }
+
+
+    public void RegainStamina(float waittime)
+    {
+        StartCoroutine(StaminaRegain(waittime));
     }
 
     private void InRange(float Distance)
@@ -87,16 +102,21 @@ public class EnemyController : MonoBehaviour
         Vector3 lookTarget = new Vector3(target.position.x, transform.position.y, target.position.z);
         transform.rotation = Quaternion.LookRotation(lookTarget);
         ClearAllTriggers();
-        if(mut.rArmMutation == 0)
+        if(stamina > 3)
         {
-            animator.SetTrigger("RA_Unmutated");
-        }else if(mut.rArmMutation == 1)
-        {
-            animator.SetTrigger("RA_Defected");
-        }else if (mut.rArmMutation == 2)
-        {
-            animator.SetTrigger("RA_Abberant");
-        }
+            if (mut.rArmMutation == 0)
+            {
+                animator.SetTrigger("RA_Unmutated");
+            }
+            else if (mut.rArmMutation == 1)
+            {
+                animator.SetTrigger("RA_Defected");
+            }
+            else if (mut.rArmMutation == 2)
+            {
+                animator.SetTrigger("RA_Abberant");
+            }
+        } 
     }
 
     private void ClearAllTriggers()
