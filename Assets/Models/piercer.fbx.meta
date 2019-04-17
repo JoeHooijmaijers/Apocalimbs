@@ -3,23 +3,18 @@ guid: a4b22ad9c653a35428a05fadfd2e271d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: MutantMesh.001
-    100002: //RootNode
-    100004: Sun
-    400000: MutantMesh.001
-    400002: //RootNode
-    400004: Sun
-    2100000: mutant_M.001
-    2300000: MutantMesh.001
-    3300000: MutantMesh.001
+    100000: //RootNode
+    400000: //RootNode
+    2100000: Material
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: MutantMesh.001
-    10800000: Sun
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: mutant_M.001
-    second: {fileID: 2100000, guid: e325fe2cf0550984fb1c0cb718ced5b8, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: d13c317d55f3d75489c6f130ce559826, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
