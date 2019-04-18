@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 7769944409746014671}
   - component: {fileID: 7769944409746014670}
   - component: {fileID: 7769944409746014664}
-  - component: {fileID: 7769944409746014665}
   - component: {fileID: 7769944409746014666}
   m_Layer: 0
   m_Name: Player
@@ -169,6 +168,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   mut: {fileID: 0}
   stats: {fileID: 11400000, guid: f5c0baf7a6ad8c043856cc868523a0f1, type: 2}
+  stamina: 0
 --- !u!114 &7769944409746014664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,19 +200,6 @@ MonoBehaviour:
   rArmMaxPts: 200
   lLegMaxPts: 200
   rLegsMaxPts: 200
---- !u!114 &7769944409746014665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7769944409746014656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78458d8885747c41a6a68c234e9a36e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 0}
 --- !u!114 &7769944409746014666
 MonoBehaviour:
   m_ObjectHideFlags: 0

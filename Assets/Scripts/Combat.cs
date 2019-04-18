@@ -15,15 +15,12 @@ public class Combat : MonoBehaviour
 
     public Animator anim;
 
+    public GameEvent gotHit;
+
     private void Start()
     {
         mut =  GetComponent<Mutation>();
         anim = GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        
     }
 
     public void TakeDamage(int damage, GameObject damagesource)
@@ -44,6 +41,23 @@ public class Combat : MonoBehaviour
         {
             Die(damagesource);
         }
+
+        if (CheckIfPlayer())
+        {
+            gotHit.Raise();
+        }
+    }
+
+    bool CheckIfPlayer()
+    {
+        if(gameObject.tag == "Player")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void Heal(int healing)
@@ -55,6 +69,10 @@ public class Combat : MonoBehaviour
         else
         {
             health += healing;
+        }
+        if (CheckIfPlayer())
+        {
+            gotHit.Raise();
         }
     }
 

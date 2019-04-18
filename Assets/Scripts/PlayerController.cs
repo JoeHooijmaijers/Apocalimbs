@@ -6,14 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
     private Animator animator;
-    public Mutation mut;
 
+    public GameEvent playerUsesStamina;
+
+    public Mutation mut;
     public PlayerStats stats;
 
-    //public float movementSpeed;
-    //public float jumpHeight;
-    //public float rotationSpeed;
-    //public float dodgerollSpeed;
+    public int stamina;
+    [SerializeField] private int maxStamina;
 
     private float invincibletime;
     private float stuntime;
@@ -99,15 +99,20 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetAxis("Horizontal") !=0 || Input.GetAxis("Vertical") != 0)
         {
-            //RollDirection
-            Vector3 targetDirection = new Vector3(Input.GetAxisRaw("Horizontal") * stats.rollSpeed * Time.deltaTime, 0f, Input.GetAxisRaw("Vertical") * stats.rollSpeed * Time.deltaTime);
-            targetDirection = Camera.main.transform.TransformDirection(targetDirection);
-            targetDirection.y = 0.0f;
-            //directional dodgeroll costing 1 Radpoint
-            rb.AddForce(targetDirection, ForceMode.Impulse);
-            //transform.Translate(targetDirection, Space.World);
-            invincibletime = 0.5f;
-            stuntime = 0.8f;
+            if(stamina >= 1)
+            {
+                //RollDirection
+                Vector3 targetDirection = new Vector3(Input.GetAxisRaw("Horizontal") * stats.rollSpeed * Time.deltaTime, 0f, Input.GetAxisRaw("Vertical") * stats.rollSpeed * Time.deltaTime);
+                targetDirection = Camera.main.transform.TransformDirection(targetDirection);
+                targetDirection.y = 0.0f;
+                //directional dodgeroll costing 1 Radpoint
+                rb.AddForce(targetDirection, ForceMode.Impulse);
+                //transform.Translate(targetDirection, Space.World);
+                invincibletime = 0.5f;
+                stuntime = 0.8f;
+                stamina--;
+                playerUsesStamina.Raise();
+            }
             
         }
         else
