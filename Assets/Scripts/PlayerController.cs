@@ -37,6 +37,13 @@ public class PlayerController : MonoBehaviour
         if(stuntime <= 0)
         {
             Movement();
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                LeftArmAttack();
+                Debug.Log("memes");
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 RightArmAttack();
@@ -148,13 +155,17 @@ public class PlayerController : MonoBehaviour
         else if(mut.rArmMutation == 1)
         {
             animator.SetTrigger("RightArmAttackDefected");
-            AttackStun(0.5f);
+            AttackStun(0.7f);
         }
     }
 
     void LeftArmAttack()
     {
-
+        if(mut.lArmMutation == 0)
+        {
+            animator.SetTrigger("LeftArmAttackUnmutated");
+            AttackStun(0.7f);
+        }
     }
 
     void RightLegAttack()
