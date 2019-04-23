@@ -32,7 +32,14 @@ public class Hitbox : MonoBehaviour
             {
                 Vector3 hitDirection = col.transform.position - par.transform.position;
                 int force = GetComponentInParent<Combat>().knockbackforce;
-                col.GetComponent<EnemyController>().Knockback(hitDirection, force);
+                if(col.GetComponent<EnemyController>() != null)
+                {
+                    col.GetComponent<EnemyController>().Knockback(hitDirection, force);
+                }else if(col.GetComponent<SwarmingEnemyController>() != null)
+                {
+                    col.GetComponent<SwarmingEnemyController>().Knockback(hitDirection, force);
+                }
+                
 
                 col.GetComponent<Combat>().TakeDamage(damage, par);
 

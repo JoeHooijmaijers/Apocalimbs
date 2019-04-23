@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class SwarmingEnemyController : MonoBehaviour
 {
     Transform target;
     NavMeshAgent nav;
@@ -12,17 +11,18 @@ public class EnemyController : MonoBehaviour
     Rigidbody rb;
     Mutation mut;
 
-    public float awareness = 6f;
+    public float awareness = 20f;
     public float turnSpeed = 3f;
     public float attackrange = 5f;
     private float distance;
     public string triggerName;
 
+
     [SerializeField] private int maxStamina;
     public int stamina;
+
     private float stamtimer = 10f;
 
-   
     void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
@@ -34,25 +34,27 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        RegainStamina();
         distance = Vector3.Distance(target.position, transform.position);
-       
+
         if (distance <= awareness)
         {
-            FaceTarget();
-            InRange(distance);
+            //FaceTarget();
+            transform.LookAt(2 * transform.position - target.position);
+            nav.SetDestination(target.position);
         }
 
-        if(distance <= attackrange)
+        if (distance <= attackrange)
         {
             Attack();
         }
     }
-
+    
     private void RegainStamina()
     {
-        if (stamina < maxStamina)
+        if(stamina < maxStamina)
         {
-            if (stamtimer <= 0)
+            if(stamtimer <= 0)
             {
                 stamina++;
                 stamtimer = 10f;
@@ -61,24 +63,6 @@ public class EnemyController : MonoBehaviour
             {
                 stamtimer -= Time.deltaTime;
             }
-        }
-    }
-
-    private void InRange(float Distance)
-    {
-        if (Distance <= nav.stoppingDistance)
-        {
-            animator.SetTrigger(triggerName);
-        }
-    }
-
-    private void OnTriggerStay(Collider col)
-    {
-        if (col.transform == target)
-        {
-            Vector3 LastSeen = new Vector3(target.position.x, target.position.y, target.position.z);
-            nav.SetDestination(LastSeen);
-            InRange(distance);
         }
     }
 
@@ -99,7 +83,6 @@ public class EnemyController : MonoBehaviour
     public void Knockback(Vector3 Direction, int force)
     {
         rb.AddForce(Direction * force, ForceMode.Impulse);
-        //###Doesn't work properly!### kinda
     }
 
     public void Attack()
@@ -107,7 +90,7 @@ public class EnemyController : MonoBehaviour
         Vector3 lookTarget = new Vector3(target.position.x, transform.position.y, target.position.z);
         transform.rotation = Quaternion.LookRotation(lookTarget);
         ClearAllTriggers();
-        if(stamina > 3)
+        if (stamina > 3)
         {
             if (mut.rArmMutation == 0)
             {
@@ -121,7 +104,7 @@ public class EnemyController : MonoBehaviour
             {
                 animator.SetTrigger("RA_Abberant");
             }
-        } 
+        }
     }
 
     private void ClearAllTriggers()
