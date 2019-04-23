@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 41e520b07dbcd3740a53c11a1635f8bc, type: 2}
+  - {fileID: 2100000, guid: 3fb585c8dc24eaa4bb17af227d315221, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,9 +166,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  playerUsesStamina: {fileID: 0}
   mut: {fileID: 0}
   stats: {fileID: 11400000, guid: f5c0baf7a6ad8c043856cc868523a0f1, type: 2}
   stamina: 0
+  maxStamina: 0
 --- !u!114 &7769944409746014664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +220,7 @@ MonoBehaviour:
   knockbackforce: 0
   defense: 5
   anim: {fileID: 0}
+  gotHit: {fileID: 0}
 --- !u!1 &7769944410167184411
 GameObject:
   m_ObjectHideFlags: 0
