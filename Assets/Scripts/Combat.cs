@@ -12,7 +12,7 @@ public class Combat : MonoBehaviour
 
     public int knockbackforce;
     public int defense;
-
+    [SerializeField] private float invincibility;
     public Animator anim;
 
     public GameEvent gotHit;
@@ -23,29 +23,46 @@ public class Combat : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if(invincibility > 0)
+        {
+            invincibility -= Time.deltaTime;
+        }
+    }
+
     public void TakeDamage(int damage, GameObject damagesource)
     {
-        anim.SetTrigger("IsHit");
-        if(damage - defense <= 0)
+        if(invincibility <= 0)
         {
-            health -= 1;
-        }
-        else
-        {
-            health -= damage - defense;
-        }
+            anim.SetTrigger("IsHit");
+            if (damage - defense <= 0)
+            {
+                health -= 1;
+            }
+            else
+            {
+                health -= damage - defense;
+            }
 
-        Debug.Log(health);
+            Debug.Log(health);
 
-        if(health <= 0)
-        {
-            Die(damagesource);
-        }
+            if (health <= 0)
+            {
+                Die(damagesource);
+            }
 
-        if (CheckIfPlayer())
-        {
-            gotHit.Raise();
+            if (CheckIfPlayer())
+            {
+                gotHit.Raise();
+            }
         }
+        
+    }
+
+    public void BecomeInvincible(float duration)
+    {
+        invincibility = duration;
     }
 
     bool CheckIfPlayer()

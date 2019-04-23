@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public int stamina;
     [SerializeField] private int maxStamina;
 
-    private float invincibletime;
     private float stuntime;
 
     float distanceToGround;
@@ -64,11 +63,10 @@ public class PlayerController : MonoBehaviour
             stuntime -= Time.deltaTime;
         }
 
-        if(invincibletime >= 0)
+        if(stamina < maxStamina)
         {
-            invincibletime -= Time.deltaTime;
-        }
 
+        }
 
     }
 
@@ -82,25 +80,8 @@ public class PlayerController : MonoBehaviour
         {
             var targetRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, stats.RotationSpeed * Time.deltaTime);
-        }
-        //if (Input.GetKey("space"))
-        //{
-        //    Jump();
-        //}
-        
-        
-
+        }  
     }
-
-    //void Jump()
-    //{
-    //    bool IsGrounded = Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.0f);
-
-    //    if (IsGrounded)
-    //    {
-    //        rb.velocity += jumpHeight * Vector3.up;
-    //    }
-    //}
 
     void DodgeRoll()
     {
@@ -114,8 +95,8 @@ public class PlayerController : MonoBehaviour
                 targetDirection.y = 0.0f;
                 //directional dodgeroll costing 1 Radpoint
                 rb.AddForce(targetDirection, ForceMode.Impulse);
+                animator.SetTrigger("DodgeRoll");
                 //transform.Translate(targetDirection, Space.World);
-                invincibletime = 0.5f;
                 stuntime = 0.8f;
                 stamina--;
                 playerUsesStamina.Raise();
@@ -131,7 +112,6 @@ public class PlayerController : MonoBehaviour
     public void Knockback(Vector3 Direction, int force)
     {
         rb.AddForce(Direction* 2, ForceMode.Impulse);
-        invincibletime = 1.0f;
     }
 
     private void AttackStun(float duration)
@@ -145,17 +125,17 @@ public class PlayerController : MonoBehaviour
         if(mut.rArmMutation == 0)
         {
             animator.SetTrigger("RightArmAttackUnmutated");
-            AttackStun(0.7f);
+            AttackStun(0.9f);
         }
         else if (mut.rArmMutation == 1 && IsPlaying(animator, "RightArm_Attack_Defected"))
         {
             animator.SetTrigger("RightArmAttackDefected2");
-            AttackStun(0.7f);
+            AttackStun(0.9f);
         }
         else if(mut.rArmMutation == 1)
         {
             animator.SetTrigger("RightArmAttackDefected");
-            AttackStun(0.7f);
+            AttackStun(1.1f);
         }
     }
 
@@ -164,6 +144,10 @@ public class PlayerController : MonoBehaviour
         if(mut.lArmMutation == 0)
         {
             animator.SetTrigger("LeftArmAttackUnmutated");
+            AttackStun(0.5f);
+        }else if(mut.lArmMutation == 1)
+        {
+            animator.SetTrigger("LeftArmAttackDefected");
             AttackStun(0.7f);
         }
     }
