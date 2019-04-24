@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 LeftArmAttack();
-                Becomeinvisible();
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -113,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     public void Knockback(Vector3 Direction, int force)
     {
-        rb.AddForce(Direction* 2, ForceMode.Impulse);
+        rb.AddForce(Direction* 2, ForceMode.Force);
     }
 
     private void AttackStun(float duration)

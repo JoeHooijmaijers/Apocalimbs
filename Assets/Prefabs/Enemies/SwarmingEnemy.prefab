@@ -95,7 +95,7 @@ Transform:
   m_GameObject: {fileID: 8897455973165927259}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 28.874733, y: 0.5, z: -15.757418}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4755548274309995979}
   - {fileID: 1898946863406430937}
@@ -169,7 +169,7 @@ Rigidbody:
   m_GameObject: {fileID: 8897455973165927259}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 10
+  m_Drag: 3
   m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -205,7 +205,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.7
-  m_Speed: 3
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -245,11 +245,12 @@ MonoBehaviour:
   maxHealth: 0
   health: 200
   ArmAttackPower: 50
-  knockbackforce: 6
+  knockbackforce: 2
   defense: 1
   invincibility: 0
   anim: {fileID: 0}
   gotHit: {fileID: 0}
+  died: {fileID: 0}
 --- !u!114 &7031189024703297892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,5 +298,5 @@ MonoBehaviour:
   turnSpeed: 3
   attackrange: 5
   triggerName: 
-  maxStamina: 0
-  stamina: 0
+  maxStamina: 4
+  stamina: 4
