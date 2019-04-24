@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3812264179323379570
+--- !u!1 &8367724833755958761
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3812264179323379341}
-  - component: {fileID: 3812264179323379342}
-  - component: {fileID: 3812264179323379343}
-  - component: {fileID: 3812264179323379568}
-  - component: {fileID: 3812264179323379569}
+  - component: {fileID: 8367724833755958738}
+  - component: {fileID: 8367724833755958741}
+  - component: {fileID: 8367724833755958740}
+  - component: {fileID: 8367724833755958743}
+  - component: {fileID: 8367724833755958742}
+  - component: {fileID: 8367724833755958739}
   m_Layer: 0
-  m_Name: SpawnTrigger
+  m_Name: Respawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3812264179323379341
+--- !u!4 &8367724833755958738
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3812264179323379570}
+  m_GameObject: {fileID: 8367724833755958761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15, y: 0.5, z: -41.2}
-  m_LocalScale: {x: 1.5, y: 1, z: 8}
+  m_LocalPosition: {x: -32.43, y: 0.5, z: 58.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3812264179323379342
+--- !u!33 &8367724833755958741
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3812264179323379570}
+  m_GameObject: {fileID: 8367724833755958761}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3812264179323379343
+--- !u!23 &8367724833755958740
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3812264179323379570}
-  m_Enabled: 0
+  m_GameObject: {fileID: 8367724833755958761}
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -79,31 +80,60 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3812264179323379568
+--- !u!65 &8367724833755958743
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3812264179323379570}
+  m_GameObject: {fileID: 8367724833755958761}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3812264179323379569
+--- !u!114 &8367724833755958742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3812264179323379570}
+  m_GameObject: {fileID: 8367724833755958761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 032a5c758a0ea5d40b28c2cb1aacf586, type: 3}
+  m_Script: {fileID: 11500000, guid: a02f413da87015440b5ce1f37f02ffaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerEnterEvent: {fileID: 11400000, guid: 54d3ba2413ec3e24fb0e381421d5ec1b, type: 2}
-  triggerExitEvent: {fileID: 0}
-  destroyOnActivate: 1
+  player: {fileID: 0}
+  spawnLocation: {x: 0, y: 0.5, z: 0}
+  mainCam: {fileID: 0}
+--- !u!114 &8367724833755958739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8367724833755958761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f02f82a1a900dd41862b966561511f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: b8ef1c810cd6a10439ab6c7f963e76a3, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8367724833755958742}
+        m_MethodName: SpawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

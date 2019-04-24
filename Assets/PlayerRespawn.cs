@@ -11,6 +11,7 @@ public class PlayerRespawn : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
+        spawnLocation = transform.position;
     }
 
     IEnumerator IESpawnPlayer()
