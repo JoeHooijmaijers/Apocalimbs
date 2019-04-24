@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     public GameEvent playerUsesStamina;
+    public GameEvent playerRegainsStamina;
 
     public Mutation mut;
     public PlayerStats stats;
 
     public int stamina;
+    [SerializeField] private float stamTimer;
     [SerializeField] private int maxStamina;
 
     private float stuntime;
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 LeftArmAttack();
-                Debug.Log("memes");
+                Becomeinvisible();
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
         if(stamina < maxStamina)
         {
-
+            RegainStamina();
         }
 
     }
@@ -92,9 +94,9 @@ public class PlayerController : MonoBehaviour
                 //RollDirection
                 Vector3 targetDirection = new Vector3(Input.GetAxisRaw("Horizontal") * stats.rollSpeed * Time.deltaTime, 0f, Input.GetAxisRaw("Vertical") * stats.rollSpeed * Time.deltaTime);
                 targetDirection = Camera.main.transform.TransformDirection(targetDirection);
-                targetDirection.y = 0.0f;
+                targetDirection.y = 0.5f;
                 //directional dodgeroll costing 1 Radpoint
-                rb.AddForce(targetDirection, ForceMode.Impulse);
+                rb.AddForce(targetDirection, ForceMode.Force);
                 animator.SetTrigger("DodgeRoll");
                 //transform.Translate(targetDirection, Space.World);
                 stuntime = 0.8f;
@@ -139,6 +141,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void RegainStamina()
+    {
+        if (stamTimer <= 0)
+        {
+            stamina++;
+            stamTimer = 5f;
+            playerUsesStamina.Raise();
+
+        }
+        else
+        {
+            stamTimer -= Time.deltaTime;
+        }
+    }
+
+    public void Respawn(Vector3 location)
+    {
+        transform.position = location;
+        stamina = maxStamina;
+        stamTimer = 5f;
+    }
+
     void LeftArmAttack()
     {
         if(mut.lArmMutation == 0)
@@ -172,5 +196,15 @@ public class PlayerController : MonoBehaviour
         {
             return false;
         }      
+    }
+
+    public void Becomeinvisible()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void BecomeVisible()
+    {
+        GetComponent<MeshRenderer>().enabled = true;
     }
 }

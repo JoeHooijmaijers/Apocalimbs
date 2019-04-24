@@ -16,6 +16,7 @@ public class Combat : MonoBehaviour
     public Animator anim;
 
     public GameEvent gotHit;
+    public GameEvent died;
 
     private void Start()
     {
@@ -54,8 +55,10 @@ public class Combat : MonoBehaviour
 
             if (CheckIfPlayer())
             {
+                BecomeInvincible(0.5f);
                 gotHit.Raise();
             }
+
         }
         
     }
@@ -68,6 +71,18 @@ public class Combat : MonoBehaviour
     bool CheckIfPlayer()
     {
         if(gameObject.tag == "Player")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool CheckIfBoss()
+    {
+        if(gameObject.tag == "Boss")
         {
             return true;
         }
@@ -93,6 +108,12 @@ public class Combat : MonoBehaviour
         }
     }
 
+    public void FullHeal()
+    {
+        health = maxHealth;
+        gotHit.Raise();
+    }
+
     public void UpdateDamage()
     {
         if(mut!= null)
@@ -103,11 +124,26 @@ public class Combat : MonoBehaviour
 
     public void Die(GameObject killer)
     {
-        Destroy(gameObject);
         if (killer.tag != "Boss" || killer.tag != "Projectile")
         {
-            killer.GetComponent<Mutation>().AbsorbMutations(mut.lArmPts, mut.rArmPts, mut.lLegPts, mut.rLegsPts);
+            if (killer.GetComponent<Mutation>() != null && gameObject.GetComponent<Mutation>() != null)
+            {
+                killer.GetComponent<Mutation>().AbsorbMutations(mut.lArmPts, mut.rArmPts, mut.lLegPts, mut.rLegsPts);
+            }
         }
-        //GameObject ragdoll = (GameObject)Instantiate(aa, transform.position, transform.rotation);
+        if (CheckIfPlayer())
+        {
+            died.Raise();
+        }
+        else if (CheckIfBoss())
+        {
+            died.Raise();
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }

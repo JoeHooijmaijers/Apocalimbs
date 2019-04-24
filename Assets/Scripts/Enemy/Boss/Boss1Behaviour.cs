@@ -163,11 +163,11 @@ public class Boss1Behaviour : MonoBehaviour
         Walking = walktime;
     }
 
-    private void GapCloser()
-    {
-        ClearAllTriggers();
-        anim.SetTrigger("Gapcloser");
-    }
+    //private void GapCloser()
+    //{
+    //    ClearAllTriggers();
+    //    anim.SetTrigger("Gapcloser");
+    //}
 
     private void MidAttack()
     {
