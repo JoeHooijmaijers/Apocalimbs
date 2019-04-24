@@ -141,6 +141,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void LeftArmAttack()
+    {
+        if (mut.lArmMutation == 0)
+        {
+            animator.SetTrigger("LeftArmAttackUnmutated");
+            AttackStun(0.5f);
+        }
+        else if (mut.lArmMutation == 1)
+        {
+            animator.SetTrigger("LeftArmAttackDefected");
+            AttackStun(0.7f);
+        }
+    }
+
     private void RegainStamina()
     {
         if (stamTimer <= 0)
@@ -161,20 +175,7 @@ public class PlayerController : MonoBehaviour
         transform.position = location;
         stamina = maxStamina;
         stamTimer = 5f;
-    }
-
-    void LeftArmAttack()
-    {
-        if(mut.lArmMutation == 0)
-        {
-            animator.SetTrigger("LeftArmAttackUnmutated");
-            AttackStun(0.5f);
-        }else if(mut.lArmMutation == 1)
-        {
-            animator.SetTrigger("LeftArmAttackDefected");
-            AttackStun(0.7f);
-        }
-    }
+    } 
 
     void RightLegAttack()
     {
