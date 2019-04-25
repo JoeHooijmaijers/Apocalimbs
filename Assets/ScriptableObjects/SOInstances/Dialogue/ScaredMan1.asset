@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2ad66cc240c8419283d8e5042f5ee, type: 3}
+  m_Name: ScaredMan1
+  m_EditorClassIdentifier: 
+  name: Scared Sammy
+  dialogue:
+  - O-oh! Y-y-you seem like a sane person, where did you come from?
+  - I could use a few more of your kind a-around here...
+  - Everyone's mad, everyone's been mad for a long lo-l-l...
+  - I sure hope Arnold is ok... He's my pal, y's-s-see?
+  - Last p-pl-place I saw 'im was 'n the parkin' lot.
+  - Can ye find 'im for me, pal?

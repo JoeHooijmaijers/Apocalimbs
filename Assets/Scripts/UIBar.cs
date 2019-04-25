@@ -22,4 +22,14 @@ public class UIBar : MonoBehaviour
     {
         bar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, player.GetComponent<Combat>().health);
     }
+
+    public void UISetactive()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void UISetInactive()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2ad66cc240c8419283d8e5042f5ee, type: 3}
+  m_Name: HintNPC1
+  m_EditorClassIdentifier: 
+  name: Nardy
+  dialogue:
+  - Oi, you! You look like you're keeping it together, unlike that scared boy and
+    the rest of the mutts around here.
+  - Could you do me a solid? I mean, if it's not too much to ask.
+  - You see, theres this big fellow past the park and streets. He didn't seem to like
+    me much.
+  - The guy started slamming his fists on the ground, and would you believe it, the
+    ground under my feet just erupted!
+  - If I weren't such a fast guy I'd have definitely been toast!
+  - Aaanyway, I want him gone, killed. Not like he's sane anyway...
+  - Cheers friend, I'll see you around!

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2ad66cc240c8419283d8e5042f5ee, type: 3}
+  m_Name: ScaredMan2
+  m_EditorClassIdentifier: 
+  name: Scared Sammy
+  dialogue:
+  - O- oh! I didn't introd-d-duce myself yet did I?
+  - I'm S-S-Sammy. Came here from Limb Angeles, looking for a better situation...
+  - What did I expect... Everything's gone to the dogs now, with all those mutated
+    fff-fuckers around...
+  - Oh did you find Arnold by any chance?
+  - Well, that's a bummer... Please keep lookin' for 'im, eh, pal? I'll d-d-do the
+    same...

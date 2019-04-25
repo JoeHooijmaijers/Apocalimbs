@@ -26,7 +26,10 @@ public class SwarmingEnemyController : MonoBehaviour
     void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        if (GameObject.FindGameObjectWithTag("Player").transform != null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         mut = GetComponent<Mutation>();
@@ -34,6 +37,11 @@ public class SwarmingEnemyController : MonoBehaviour
 
     void Update()
     {
+        if(target == null)
+        {
+            
+           
+        }
         RegainStamina();
         distance = Vector3.Distance(target.position, transform.position);
 

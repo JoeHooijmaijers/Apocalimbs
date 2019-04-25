@@ -15,7 +15,7 @@ public class Combat : MonoBehaviour
     [SerializeField] private float invincibility;
     public Animator anim;
 
-    public GameEvent gotHit;
+    public GameEvent healthChanged;
     public GameEvent died;
 
     private void Start()
@@ -56,7 +56,10 @@ public class Combat : MonoBehaviour
             if (CheckIfPlayer())
             {
                 BecomeInvincible(0.5f);
-                gotHit.Raise();
+                healthChanged.Raise();
+            }else if (CheckIfBoss())
+            {
+                healthChanged.Raise();
             }
 
         }
@@ -104,14 +107,23 @@ public class Combat : MonoBehaviour
         }
         if (CheckIfPlayer())
         {
-            gotHit.Raise();
+            healthChanged.Raise();
+        }else if (CheckIfBoss())
+        {
+            healthChanged.Raise();
         }
     }
 
     public void FullHeal()
     {
         health = maxHealth;
-        gotHit.Raise();
+        if (CheckIfPlayer())
+        {
+            healthChanged.Raise();
+        }else if (CheckIfBoss())
+        {
+            healthChanged.Raise();
+        }
     }
 
     public void UpdateDamage()
@@ -120,6 +132,11 @@ public class Combat : MonoBehaviour
         {
             ArmAttackPower *= mut.rArmMutation + 1;
         }
+    }
+
+    public void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 
     public void Die(GameObject killer)

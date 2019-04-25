@@ -8,25 +8,48 @@ public class RaiseEventOnTriggerEnter : MonoBehaviour
     public GameEvent triggerExitEvent;
 
     public bool destroyOnActivate;
+    public bool disableOnActivate;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.tag == "Player")
         {
             triggerEnterEvent.Raise();
-        }
+            if (destroyOnActivate)
+            {
+                StartCoroutine(DestroyWithTimer());
+            }
+            else if (disableOnActivate)
+            {
+                DisableObject();
+            }
+        }     
+    }
 
-        if (destroyOnActivate)
-        {
-            Destroy(gameObject);
-        }
+    IEnumerator DestroyWithTimer()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            triggerExitEvent.Raise();
+            if(triggerExitEvent != null)
+            {
+                triggerExitEvent.Raise();
+            }
         }
+    }
+
+    public void DisableObject()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void EnableObject()
+    {
+        gameObject.SetActive(true);
     }
 }

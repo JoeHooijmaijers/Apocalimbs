@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b2ad66cc240c8419283d8e5042f5ee, type: 3}
+  m_Name: HintNPC2
+  m_EditorClassIdentifier: 
+  name: Nardy
+  dialogue:
+  - Ah you again?
+  - Do be ware! If you're going though the park, the fences are under a current.
+  - There's probably a way to deactivate it, but I haven't a clue
+  - Well, off with you, now! Eh, friend..

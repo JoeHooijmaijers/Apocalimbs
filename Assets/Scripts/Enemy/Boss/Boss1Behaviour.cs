@@ -155,11 +155,12 @@ public class Boss1Behaviour : MonoBehaviour
         anim.ResetTrigger("MidAttack1");
         anim.ResetTrigger("FarAttack1");
     }
-    private void WalkAround()
+
+    public void WalkAround()
     {
-        walktarget = Random.onUnitSphere * 5;
+        walktarget = Random.onUnitSphere * 10;
         walktarget.y = 0;
-        float walktime = Random.Range(1.0f, 4.0f);
+        float walktime = Random.Range(1.5f, 6f);
         Walking = walktime;
     }
 

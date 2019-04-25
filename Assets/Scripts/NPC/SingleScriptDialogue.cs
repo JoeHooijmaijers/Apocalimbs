@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SingleScriptDialogue : MonoBehaviour
 {
     
-    [SerializeField] private List<DialogueText> dialogues;
+    public List<DialogueText> dialogues;
     private int talkedTo;
     private Queue<string> sentences;
 

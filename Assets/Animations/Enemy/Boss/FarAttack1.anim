@@ -917,7 +917,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 4.5
+  - time: 4.45
     functionName: WalkAround
     data: 
     objectReferenceParameter: {fileID: 0}
