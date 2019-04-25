@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     Rigidbody rb;
     Mutation mut;
 
-    public float awareness = 6f;
+    public float awareness = 20f;
     public float turnSpeed = 3f;
     public float attackrange = 5f;
     private float distance;
@@ -43,6 +43,7 @@ public class EnemyController : MonoBehaviour
         if (distance <= awareness)
         {
             FaceTarget();
+            nav.SetDestination(target.position);
             InRange(distance);
         }
 
@@ -108,8 +109,6 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
-        Vector3 lookTarget = new Vector3(target.position.x, transform.position.y, target.position.z);
-        transform.rotation = Quaternion.LookRotation(lookTarget);
         ClearAllTriggers();
         if(stamina > 3)
         {

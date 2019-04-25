@@ -47,8 +47,8 @@ public class SwarmingEnemyController : MonoBehaviour
 
         if (distance <= awareness)
         {
-            //FaceTarget();
-            transform.LookAt(2 * transform.position - target.position);
+            FaceTarget();
+            transform.LookAt(transform.position - target.position);
             nav.SetDestination(target.position);
         }
 
@@ -76,10 +76,13 @@ public class SwarmingEnemyController : MonoBehaviour
 
     private void FaceTarget()
     {
-        Quaternion currentrot = Quaternion.LookRotation(new Vector3(this.transform.position.x, 0, this.transform.position.z));
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
+        Vector3 targetPos = target.position - transform.position;
+        targetPos.y = transform.position.y;
+        transform.rotation = Quaternion.LookRotation(targetPos);
+        //Quaternion currentrot = Quaternion.LookRotation(new Vector3(this.transform.position.x, 0, this.transform.position.z));
+        //Vector3 direction = (target.position - transform.position).normalized;
+        //Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        //transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
     }
 
     private void OnDrawGizmosSelected()
@@ -95,8 +98,6 @@ public class SwarmingEnemyController : MonoBehaviour
 
     public void Attack()
     {
-        Vector3 lookTarget = new Vector3(target.position.x, transform.position.y, target.position.z);
-        transform.rotation = Quaternion.LookRotation(lookTarget);
         ClearAllTriggers();
         if (stamina > 3)
         {

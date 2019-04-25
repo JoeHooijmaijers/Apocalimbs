@@ -667,14 +667,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c4806a95ed4064e99af78342cccdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
-  health: 200
+  maxHealth: 50
+  health: 50
   ArmAttackPower: 50
   knockbackforce: 6
   defense: 5
   invincibility: 0
   anim: {fileID: 0}
-  gotHit: {fileID: 0}
+  healthChanged: {fileID: 0}
   died: {fileID: 0}
 --- !u!114 &6888309349132564266
 MonoBehaviour:

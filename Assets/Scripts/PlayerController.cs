@@ -137,6 +137,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("RightArmAttackDefected");
             AttackStun(1.1f);
+        }else if(mut.rArmMutation == 2)
+        {
+            animator.SetTrigger("RightArmAttackAbberant");
+            AttackStun(2.5f);
         }
     }
 
