@@ -160,7 +160,7 @@ public class Boss1Behaviour : MonoBehaviour
     {
         walktarget = Random.onUnitSphere * 10;
         walktarget.y = 0;
-        float walktime = Random.Range(1.5f, 6f);
+        float walktime = Random.Range(1.5f, 3f);
         Walking = walktime;
     }
 
